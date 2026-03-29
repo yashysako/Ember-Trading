@@ -47,7 +47,7 @@ a:hover~#cursor,button:hover~#cursor{width:16px;height:16px}
 ::-webkit-scrollbar-thumb{background:var(--fire3);border-radius:2px}
 
 /* ── Ticker ───────────────────────────────────────────────────── */
-.ticker{background:rgba(7,9,13,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.35rem 0;overflow:hidden}
+.ticker{position:fixed;top:52px;left:0;right:0;z-index:199;background:rgba(7,9,13,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.35rem 0;overflow:hidden}
 .ticker-track{display:flex;gap:2.5rem;animation:ticker 40s linear infinite;width:max-content}
 .ticker-item{font-family:var(--mono);font-size:.68rem;display:flex;align-items:center;gap:.45rem;white-space:nowrap;color:var(--text2)}
 .t-sym{color:var(--text);font-weight:600}
@@ -748,6 +748,42 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .mkt-status   { font-size: .55rem; padding: .12rem .35rem; }
 }
 
+
+/* ── Docs about box ───────────────────────────────────────────── */
+.docs-about-box {
+  background: rgba(22,30,40,0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .docs-about-box {
+    padding: 1.1rem 1rem;
+    border-radius: 6px;
+  }
+  .docs-about-box > div:first-child {
+    font-size: .65rem !important;
+    margin-bottom: .6rem !important;
+  }
+  .doc-item {
+    font-size: .82rem;
+    gap: .5rem;
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  .docs-list { gap: .5rem; }
+}
+
+
+@media (max-width: 640px) {
+  .ticker { top: 45px; }
+  .hero   { margin-top: 70px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -806,7 +842,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 </header>
 
 <!-- ── HERO ────────────────────────────────────────────────────────────────── -->
-<section class="hero" style="margin-top:35px">
+<section class="hero" style="margin-top:80px">
   <div class="hero-mesh"></div>
 
   <div class="wrap hero-wrap">
@@ -1241,7 +1277,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
       <div class="step d2"><div class="step-n">02</div><div class="step-name" data-i18n="docs-step2-title">Recevez les documents</div><p class="step-txt" data-i18n="docs-step2-text">Après le paiement, les documents Word de votre formation sont envoyés à votre email automatiquement.</p></div>
       <div class="step d3"><div class="step-n">03</div><div class="step-name" data-i18n="docs-step3-title">Accédez au cloud</div><p class="step-txt" data-i18n="docs-step3-text">Les documents sont sur un cloud gratuit. Aucun besoin de payer ou télécharger Word.</p></div>
     </div>
-    <div style="background:rgba(22,30,40,0.55);backdrop-filter:blur(6px);border:1px solid var(--border);border-radius:6px;padding:1.5rem 2rem" class="rv">
+    <div class="docs-about-box rv">
       <div style="font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--fire);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase" data-i18n="docs-about-title">📋 À propos de vos documents</div>
       <div class="docs-list">
         <div class="doc-item" data-i18n="docs-item1"><strong>Format Word:</strong> .docx lisible partout</div>
