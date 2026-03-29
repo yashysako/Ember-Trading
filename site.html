@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Formation Trading Forex, Commodités &amp; Métaux - EmberTrading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset ───────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090D;
+  --bg2:#0D1117;
+  --bg3:#111820;
+  --surf:#161E28;
+  --surf2:#1C2633;
+  --border:rgba(255,255,255,0.055);
+  --glow:rgba(234,88,12,0.18);
+  --fire:#F97316;
+  --fire2:#EA580C;
+  --fire3:#C2410C;
+  --amber:#FBBF24;
+  --ember:#FF6B35;
+  --green:#00D4AA;
+  --red:#FF4757;
+  --text:#ECF0F1;
+  --text2:#8899AA;
+  --text3:#4A5568;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --display:'Bebas Neue',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;overflow-x:hidden;line-height:1.6;cursor:none}
+
+/* ── Custom cursor ───────────────────────────────────────────── */
+#cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--fire);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s,background .2s;mix-blend-mode:screen}
+#cursor-ring{position:fixed;width:34px;height:34px;border-radius:50%;border:1px solid rgba(249,115,22,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,width .2s,height .2s,opacity .2s}
+body:hover #cursor{width:10px;height:10px}
+a:hover~#cursor,button:hover~#cursor{width:16px;height:16px}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--fire3);border-radius:2px}
+
+/* ── Ticker ───────────────────────────────────────────────────── */
+.ticker{background:rgba(7,9,13,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.35rem 0;overflow:hidden}
+.ticker-track{display:flex;gap:2.5rem;animation:ticker 40s linear infinite;width:max-content}
+.ticker-item{font-family:var(--mono);font-size:.68rem;display:flex;align-items:center;gap:.45rem;white-space:nowrap;color:var(--text2)}
+.t-sym{color:var(--text);font-weight:600}
+.t-up{color:var(--green)}
+.t-dn{color:var(--red)}
+.t-dot{width:5px;height:5px;border-radius:50%}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;padding:.8rem 0;
+  background:rgba(7,9,13,.75);backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid var(--border);transition:background .4s}
+.hdr.solid{background:rgba(7,9,13,.97)}
+.hdr-inner{max-width:1260px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;gap:1.5rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0}
+.logo-icon{width:32px;height:32px}
+.logo-name{font-family:var(--display);font-size:1.4rem;letter-spacing:.06em;color:var(--text);line-height:1}
+.logo-name span{color:var(--fire)}
+.nav{display:flex;align-items:center;gap:.1rem;margin-left:auto}
+.nav-btn{background:none;border:none;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+  color:var(--text2);padding:.38rem .7rem;border-radius:5px;cursor:pointer;
+  transition:color .2s,background .2s;text-transform:uppercase}
+.nav-btn:hover{color:var(--text);background:var(--surf)}
+.nav-vip{color:var(--fire) !important;border:1px solid rgba(249,115,22,.25)}
+.nav-vip:hover{background:rgba(249,115,22,.08) !important}
+.hdr-right{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.lang-btn{font-family:var(--mono);font-size:.7rem;padding:.32rem .65rem;border-radius:5px;
+  border:1px solid rgba(249,115,22,.3);color:var(--fire);background:rgba(249,115,22,.06);
+  cursor:pointer;transition:all .2s}
+.lang-btn:hover{background:rgba(249,115,22,.14)}
+.cta-hdr{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;font-weight:600;
+  padding:.42rem 1.1rem;border-radius:6px;border:none;cursor:pointer;
+  background:var(--fire);color:#000;transition:all .2s;text-transform:uppercase}
+.cta-hdr:hover{background:var(--ember);transform:translateY(-1px)}
+.ham{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:.4rem}
+.ham span{display:block;width:20px;height:2px;background:var(--text2);border-radius:1px}
+@media(max-width:860px){.nav{display:none}.ham{display:flex}}
+.nav.open{display:flex;flex-direction:column;align-items:flex-start;
+  position:absolute;top:100%;left:0;right:0;background:var(--bg);
+  border-bottom:1px solid var(--border);padding:1rem 2rem;gap:.25rem}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{min-height:100vh;display:grid;align-items:center;padding:7rem 0 4rem;
+  position:relative;overflow:hidden}
+/* Animated noise grain */
+.hero::before{content:'';position:absolute;inset:0;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 8s steps(2) infinite;pointer-events:none}
+@keyframes grainShift{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(1px,-1px)}75%{transform:translate(-1px,2px)}100%{transform:translate(2px,-2px)}}
+/* Gradient mesh */
+.hero-mesh{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 65% at 75% 45%, rgba(234,88,12,.11) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 50% at 15% 65%, rgba(192,65,12,.07) 0%,transparent 65%),
+    radial-gradient(ellipse 30% 40% at 85% 15%, rgba(251,191,36,.04) 0%,transparent 60%);
+  pointer-events:none}
+/* Grid lines */
+/* hero-grid removed — replaced by canvas */
+/* Horizontal scan line */
+/* scan-line removed */
+
+.hero-wrap{max-width:1260px;margin:0 auto;padding:0 2rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:900px){.hero-wrap{grid-template-columns:1fr;gap:2rem}}
+.hero-left{position:relative;z-index:1}
+.hero-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--fire);display:flex;align-items:center;
+  gap:.6rem;margin-bottom:1.2rem;opacity:0;animation:fadeSlideUp .8s .1s forwards}
+.eyebrow-line{width:28px;height:1px;background:var(--fire)}
+.live-pulse{width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 0 0 rgba(0,212,170,.5);animation:livePing 1.5s infinite}
+@keyframes livePing{0%{box-shadow:0 0 0 0 rgba(0,212,170,.5)}70%{box-shadow:0 0 0 8px rgba(0,212,170,0)}100%{box-shadow:0 0 0 0 rgba(0,212,170,0)}}
+.hero h1{font-family:var(--display);font-size:clamp(4rem,8vw,7.5rem);
+  line-height:.95;letter-spacing:.02em;margin-bottom:1.4rem;
+  opacity:0;animation:fadeSlideUp .9s .2s forwards}
+.h1-line{display:block}
+.h1-fire{color:var(--fire);position:relative;display:inline-block}
+.h1-fire::after{content:attr(data-text);position:absolute;left:0;top:0;
+  color:transparent;-webkit-text-stroke:1px rgba(249,115,22,.3);
+  animation:glitch 4s 2s infinite}
+@keyframes glitch{0%,90%,100%{clip-path:none;transform:none}
+  91%{clip-path:polygon(0 20%,100% 20%,100% 30%,0 30%);transform:translate(-2px,0)}
+  93%{clip-path:polygon(0 60%,100% 60%,100% 70%,0 70%);transform:translate(2px,0)}
+  95%{clip-path:none;transform:none}}
+.hero-sub{font-size:1.05rem;color:var(--text2);line-height:1.75;max-width:480px;
+  margin-bottom:2rem;opacity:0;animation:fadeSlideUp .9s .35s forwards}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem;
+  opacity:0;animation:fadeSlideUp .9s .48s forwards}
+.btn-fire{display:inline-flex;align-items:center;gap:.4rem;
+  padding:.78rem 1.8rem;border-radius:3px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.8rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:none;
+  background:var(--fire);color:#000;
+  position:relative;overflow:hidden;transition:all .25s}
+.btn-fire::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transform:translateX(-100%);transition:transform .4s}
+.btn-fire:hover::before{transform:translateX(100%)}
+.btn-fire:hover{background:var(--ember);transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(249,115,22,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.4rem;
+  padding:.75rem 1.6rem;border-radius:3px;
+  border:1px solid rgba(255,255,255,.12);cursor:pointer;
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:none;
+  color:var(--text2);background:transparent;transition:all .25s}
+.btn-ghost:hover{border-color:rgba(249,115,22,.4);color:var(--fire)}
+.hero-stats{display:flex;gap:2rem;padding-top:1.75rem;
+  border-top:1px solid var(--border);
+  opacity:0;animation:fadeSlideUp .9s .6s forwards}
+.stat-n{font-family:var(--display);font-size:2.8rem;line-height:1;color:var(--fire);
+  position:relative;display:inline-block}
+.stat-l{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text3);margin-top:.2rem}
+
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO RIGHT — dual chart widgets ────────────────────────── */
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:1rem;
+  opacity:0;animation:fadeSlideUp 1s .4s forwards}
+@media(max-width:900px){.hero-right{display:none}}
+.chart-widget{background:rgba(22,30,40,0.85);border:1px solid var(--border);backdrop-filter:blur(8px);
+  border-radius:8px;overflow:hidden;position:relative}
+.chart-widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--fire3),var(--fire),var(--amber))}
+.cw-head{display:flex;align-items:center;justify-content:space-between;
+  padding:.65rem 1rem;border-bottom:1px solid var(--border);background:rgba(13,17,23,0.7)}
+.cw-pair{font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--text)}
+.cw-badge{font-family:var(--mono);font-size:.6rem;padding:.15rem .45rem;
+  border-radius:2px;letter-spacing:.06em}
+.cw-badge.fx{background:rgba(0,212,170,.12);color:var(--green);border:1px solid rgba(0,212,170,.2)}
+.cw-badge.cm{background:rgba(249,115,22,.12);color:var(--fire);border:1px solid rgba(249,115,22,.2)}
+.cw-price{font-family:var(--mono);font-size:1.5rem;font-weight:600;
+  transition:color .3s;padding:.2rem 0}
+.cw-change{font-family:var(--mono);font-size:.75rem;font-weight:500}
+.cw-up{color:var(--green)} .cw-dn{color:var(--red)}
+.cw-body{padding:.4rem .6rem .6rem;position:relative}
+.candle-chart{width:100%;height:110px}
+.ohlc-row{display:flex;justify-content:space-around;padding:.4rem .6rem;
+  border-top:1px solid var(--border)}
+.ohlc-cell{text-align:center}
+.ohlc-lbl{font-family:var(--mono);font-size:.58rem;color:var(--text3);letter-spacing:.06em;margin-bottom:.15rem}
+.ohlc-val{font-family:var(--mono);font-size:.78rem;font-weight:500;color:var(--text)}
+.ohlc-val.up{color:var(--green)} .ohlc-val.dn{color:var(--red)}
+/* Flash animation on price update */
+@keyframes flashG{0%{text-shadow:0 0 12px var(--green)}100%{text-shadow:none}}
+@keyframes flashR{0%{text-shadow:0 0 12px var(--red)}100%{text-shadow:none}}
+.flash-g{animation:flashG .6s ease-out}
+.flash-r{animation:flashR .6s ease-out}
+
+/* ── SECTIONS ─────────────────────────────────────────────────── */
+.wrap{max-width:1260px;margin:0 auto;padding:0 2rem}
+section{padding:7rem 0;position:relative}
+.sec-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--fire);display:flex;align-items:center;
+  gap:.6rem;margin-bottom:.8rem}
+.sec-tag::before{content:'//';color:var(--fire3);font-size:.65rem}
+.sec-title{font-family:var(--display);font-size:clamp(2.2rem,4.5vw,3.8rem);
+  letter-spacing:.03em;line-height:1;margin-bottom:.6rem}
+.sec-sub{font-size:.95rem;color:var(--text2);line-height:1.75;max-width:520px}
+.divider{height:1px;
+  background:linear-gradient(90deg,transparent,rgba(249,115,22,.3) 30%,rgba(249,115,22,.3) 70%,transparent);
+  position:relative;overflow:hidden}
+.divider::after{content:'';position:absolute;top:0;height:100%;width:80px;
+  background:linear-gradient(90deg,transparent,rgba(249,115,22,.9),transparent);
+  animation:lineSweep 3.5s ease-in-out infinite}
+@keyframes lineSweep{0%{left:-80px}100%{left:100%}}
+
+/* ── ABOUT ───────────────────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:3rem}}
+.info-table{width:100%;border-collapse:collapse;margin-top:1.25rem}
+.info-table tr{border-bottom:1px solid var(--border)}
+.info-table tr:last-child{border-bottom:none}
+.info-table td{padding:.6rem .2rem;font-size:.85rem}
+.info-table td:first-child{font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.08em;color:var(--text3);text-transform:uppercase;width:38%;
+  padding-right:1rem}
+.info-table td:last-child{color:var(--text)}
+.fire-val{color:var(--fire);font-weight:500}
+.phil-card{margin-top:1.5rem;padding:1.25rem;
+  border-left:2px solid var(--fire);background:rgba(249,115,22,.06);
+  border-radius:0 6px 6px 0}
+.phil-lbl{font-family:var(--mono);font-size:.65rem;color:var(--fire);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.45rem}
+.phil-txt{font-size:.88rem;color:var(--text2);line-height:1.7}
+/* Features grid */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.feat-cell{background:rgba(13,17,23,0.6);padding:1.5rem 1.25rem;transition:background .25s;backdrop-filter:blur(4px)}
+.feat-cell:hover{background:rgba(28,38,51,0.75)}
+.feat-ico{font-size:1.25rem;margin-bottom:.65rem}
+.feat-title{font-family:var(--mono);font-size:.78rem;font-weight:600;
+  letter-spacing:.06em;color:var(--text);margin-bottom:.4rem;text-transform:uppercase}
+.feat-txt{font-size:.82rem;color:var(--text2);line-height:1.65}
+
+/* ── PROGRAMME ────────────────────────────────────────────────── */
+section.prog-bg{background:rgba(13,17,23,0.55);backdrop-filter:blur(2px)}
+.phase-list{display:flex;flex-direction:column;gap:0;margin-top:2rem}
+.phase{display:grid;grid-template-columns:80px 1fr;position:relative}
+.phase-l{display:flex;flex-direction:column;align-items:center;padding-top:1.75rem}
+.phase-num{font-family:var(--display);font-size:2.5rem;color:var(--surf2);
+  line-height:1;transition:color .4s;position:relative;z-index:1}
+.phase-vert{flex:1;width:1px;background:var(--border);margin:.4rem 0}
+.phase-r{padding:1.75rem 0 2.5rem 1.5rem;border-left:1px solid var(--border)}
+.phase-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;
+  color:var(--fire);text-transform:uppercase;margin-bottom:.3rem}
+.phase-name{font-family:var(--display);font-size:2rem;letter-spacing:.03em;
+  line-height:1;margin-bottom:.2rem}
+.phase-dur{font-family:var(--mono);font-size:.68rem;color:var(--text3);
+  letter-spacing:.06em;margin-bottom:.9rem}
+.phase-items{list-style:none;display:flex;flex-direction:column;gap:.28rem;margin-bottom:.9rem}
+.phase-items li{font-size:.85rem;color:var(--text2);display:flex;align-items:baseline;gap:.5rem;line-height:1.55}
+.phase-items li::before{content:'→';font-family:var(--mono);font-size:.7rem;color:var(--fire);flex-shrink:0}
+.phase-goal{display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.72rem;color:var(--fire);
+  padding:.28rem .7rem;border:1px solid rgba(249,115,22,.25);
+  background:rgba(249,115,22,.06);border-radius:2px;letter-spacing:.04em}
+.phase:hover .phase-num{color:var(--fire)}
+
+/* ── PRICING ──────────────────────────────────────────────────── */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;margin-bottom:1.5rem}
+@media(max-width:700px){.price-grid{grid-template-columns:1fr}}
+.price-col{background:rgba(13,17,23,0.65);padding:2rem;position:relative;backdrop-filter:blur(6px)}
+.price-col.hot{background:rgba(28,38,51,0.75)}
+.price-col.hot::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--fire3),var(--fire),var(--amber))}
+.p-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text3);margin-bottom:.6rem}
+.p-name{font-family:var(--display);font-size:2.2rem;letter-spacing:.04em;
+  line-height:1;margin-bottom:.3rem}
+.p-desc{font-size:.82rem;color:var(--text2);margin-bottom:1rem}
+.p-price{font-family:var(--mono);font-size:3rem;font-weight:600;
+  color:var(--fire);line-height:1;margin-bottom:.25rem}
+.p-once{font-family:var(--mono);font-size:.7rem;color:var(--text3);margin-bottom:1.25rem}
+.p-badge{display:inline-flex;font-family:var(--mono);font-size:.65rem;
+  padding:.2rem .6rem;border:1px solid rgba(249,115,22,.3);
+  background:rgba(249,115,22,.1);color:var(--fire);letter-spacing:.08em;
+  border-radius:2px;margin-bottom:.75rem}
+.p-items{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.25rem}
+.p-items li{font-size:.83rem;color:var(--text2);display:flex;align-items:baseline;gap:.5rem;line-height:1.5}
+.p-items li.dim{color:var(--text3)}
+.p-items li::before{content:'▸';font-family:var(--mono);font-size:.65rem;
+  color:var(--fire);flex-shrink:0}
+.p-items li.dim::before{color:var(--text3);content:'✕'}
+.p-sep{height:1px;background:var(--border);margin:.75rem 0}
+.btn-buy{display:block;width:100%;padding:.78rem;border-radius:3px;
+  text-align:center;font-family:var(--mono);font-size:.78rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+  border:none;cursor:pointer;transition:all .25s;margin-top:.75rem}
+.btn-buy-fire{background:var(--fire);color:#000}
+.btn-buy-fire:hover{background:var(--ember);transform:translateY(-1px);box-shadow:0 6px 24px rgba(249,115,22,.35)}
+.btn-buy-out{background:transparent;border:1px solid var(--border);color:var(--text2)}
+.btn-buy-out:hover{border-color:rgba(249,115,22,.3);color:var(--fire)}
+.compare-table{width:100%;border-collapse:collapse;
+  border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:.82rem}
+.compare-table th{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text3);padding:.65rem 1rem;
+  background:rgba(13,17,23,0.7);border-bottom:1px solid var(--border);text-align:left}
+.compare-table td{padding:.55rem 1rem;border-bottom:1px solid var(--border)}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.compare-table td:first-child{color:var(--text)}
+.yes{color:var(--green)} .no{color:var(--text3)}
+
+/* ── INDICATORS ───────────────────────────────────────────────── */
+section.ind-bg{background:rgba(13,17,23,0.55);backdrop-filter:blur(2px)}
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;margin-bottom:1rem}
+@media(max-width:800px){.ind-grid{grid-template-columns:1fr}}
+.ind{background:rgba(13,17,23,0.6);padding:1.5rem;display:flex;flex-direction:column;
+  transition:background .25s;position:relative}
+.ind:hover{background:rgba(28,38,51,0.75)}
+.ind.featured{background:rgba(28,38,51,0.7)}
+.ind.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--fire),transparent)}
+.ind-top{display:flex;align-items:start;justify-content:space-between;margin-bottom:.75rem}
+.ind-name{font-family:var(--mono);font-size:.78rem;font-weight:600;
+  letter-spacing:.04em;color:var(--text)}
+.ind-tags{display:flex;flex-direction:column;gap:.25rem;align-items:flex-end}
+.ind-tag{font-family:var(--mono);font-size:.58rem;padding:.12rem .4rem;
+  border-radius:2px;letter-spacing:.06em;
+  background:rgba(249,115,22,.1);color:var(--fire);border:1px solid rgba(249,115,22,.2)}
+.ind-tag.g{background:rgba(0,212,170,.08);color:var(--green);border-color:rgba(0,212,170,.2)}
+.ind-desc{font-size:.82rem;color:var(--text2);line-height:1.65;margin-bottom:.75rem;flex:1}
+.ind-feats{list-style:none;display:flex;flex-direction:column;gap:.25rem;margin-bottom:.85rem}
+.ind-feats li{font-size:.77rem;color:var(--text2);display:flex;align-items:baseline;gap:.4rem}
+.ind-feats li::before{content:'▸';font-size:.62rem;color:var(--fire);flex-shrink:0}
+.ind-bot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto}
+.ind-price{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--fire)}
+.ind-acc{font-family:var(--mono);font-size:.62rem;color:var(--text3);margin-top:.1rem}
+.btn-ind{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:.38rem .9rem;border-radius:3px;
+  text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-ind-sec{background:var(--surf2);color:var(--text);border:1px solid var(--border)}
+.btn-ind-sec:hover{border-color:rgba(249,115,22,.3);color:var(--fire)}
+.btn-ind-fire{background:var(--fire);color:#000}
+.btn-ind-fire:hover{background:var(--ember);box-shadow:0 4px 18px rgba(249,115,22,.3)}
+.ind-note{font-family:var(--mono);font-size:.75rem;color:var(--text2);text-align:center;margin-top:.75rem}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem}
+@media(max-width:640px){.tools-grid{grid-template-columns:1fr}}
+.tool{background:rgba(13,17,23,0.6);padding:1.5rem;transition:background .25s;backdrop-filter:blur(4px)}
+.tool:hover{background:rgba(28,38,51,0.75)}
+.tool-ico{font-size:1.5rem;margin-bottom:.6rem}
+.tool-name{font-family:var(--mono);font-size:.8rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.4rem}
+.tool-txt{font-size:.83rem;color:var(--text2);line-height:1.65;margin-bottom:.75rem}
+.tool-badge{font-family:var(--mono);font-size:.68rem;color:var(--fire)}
+
+/* ── VIP ──────────────────────────────────────────────────────── */
+section.vip-bg{background:rgba(13,17,23,0.45);backdrop-filter:blur(2px)}
+.vip-wrap{max-width:600px;margin:0 auto;text-align:center}
+.vip-box{background:rgba(22,30,40,0.7);border:1px solid rgba(249,115,22,.25);backdrop-filter:blur(8px);
+  border-radius:8px;padding:2.5rem 2rem;position:relative;overflow:hidden}
+.vip-box::after{content:'VIP';position:absolute;right:-20px;bottom:-20px;
+  font-family:var(--display);font-size:8rem;color:rgba(249,115,22,.04);
+  line-height:1;pointer-events:none}
+.vip-ico{font-size:2.8rem;margin-bottom:.75rem}
+.vip-txt{font-size:.9rem;color:var(--text2);line-height:1.75;margin-bottom:1.5rem}
+.vip-txt strong{color:var(--fire)}
+.vip-mgmt-row{display:flex;align-items:flex-start;gap:.75rem;
+  background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);
+  border-radius:6px;padding:1rem 1.25rem;margin-top:1.5rem;text-align:left}
+.vip-mgmt-ico{font-size:1.2rem;flex-shrink:0}
+.vip-mgmt-name{font-family:var(--mono);font-size:.73rem;font-weight:600;
+  color:var(--fire);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+.vip-mgmt-desc{font-size:.82rem;color:var(--text2);line-height:1.6}
+.vip-note{font-family:var(--mono);font-size:.72rem;color:var(--text3);margin-top:1.25rem}
+
+/* ── FAQ ──────────────────────────────────────────────────────── */
+.faq-list{display:flex;flex-direction:column;gap:.35rem;margin-top:2rem}
+.faq-item{border:1px solid var(--border);border-radius:5px;overflow:hidden;
+  transition:border-color .2s;background:rgba(7,9,13,0.5);backdrop-filter:blur(4px)}
+.faq-item.open{border-color:rgba(249,115,22,.25)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:.9rem 1.1rem;background:none;border:none;
+  text-align:left;font-family:var(--sans);font-size:.88rem;font-weight:500;
+  color:var(--text);cursor:pointer;transition:color .2s}
+.faq-q:hover{color:var(--fire)}
+.faq-ico{font-family:var(--mono);font-size:.75rem;color:var(--text3);
+  flex-shrink:0;transition:transform .3s,color .2s}
+.faq-item.open .faq-ico{transform:rotate(45deg);color:var(--fire)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.faq-inner{padding:.1rem 1.1rem 1rem;font-size:.85rem;color:var(--text2);line-height:1.7}
+
+/* ── DOCS ──────────────────────────────────────────────────────── */
+section.docs-bg{background:rgba(13,17,23,0.55);backdrop-filter:blur(2px)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem}
+@media(max-width:600px){.steps{grid-template-columns:1fr}}
+.step{background:rgba(13,17,23,0.6);padding:1.5rem;transition:background .25s;backdrop-filter:blur(4px)}
+.step:hover{background:rgba(28,38,51,0.75)}
+.step-n{font-family:var(--display);font-size:3rem;color:var(--fire3);
+  line-height:1;margin-bottom:.5rem;opacity:.5}
+.step-name{font-family:var(--mono);font-size:.78rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.4rem}
+.step-txt{font-size:.82rem;color:var(--text2);line-height:1.65}
+.docs-list{display:flex;flex-direction:column;gap:.55rem}
+.doc-item{font-size:.85rem;color:var(--text2);display:flex;gap:.6rem;align-items:baseline;line-height:1.55}
+.doc-item::before{content:'▸';font-family:var(--mono);font-size:.65rem;color:var(--fire);flex-shrink:0}
+
+/* ── CONTACT ──────────────────────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;margin-top:1.75rem}
+@media(max-width:600px){.contact-grid{grid-template-columns:1fr}}
+.c-card{background:rgba(13,17,23,0.6);padding:1.75rem;transition:background .25s;backdrop-filter:blur(4px)}
+.c-card:hover{background:rgba(28,38,51,0.75)}
+.c-card.hot{background:rgba(28,38,51,0.7)}
+.c-lbl{font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.c-val{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.35rem}
+.c-desc{font-size:.8rem;color:var(--text2);line-height:1.65;margin-bottom:1rem}
+.free-banner{background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);
+  border-radius:5px;padding:1rem 1.25rem;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
+.free-txt{font-size:.85rem;color:var(--text2)}
+.free-txt strong{color:var(--fire)}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+footer{background:rgba(7,9,13,0.8);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:3rem 0 2rem}
+.foot-inner{display:grid;grid-template-columns:1fr 2fr;gap:3rem;margin-bottom:2rem}
+@media(max-width:640px){.foot-inner{grid-template-columns:1fr}}
+.foot-brand-name{font-family:var(--display);font-size:1.5rem;letter-spacing:.06em;
+  color:var(--text);margin-bottom:.4rem}
+.foot-brand-name span{color:var(--fire)}
+.foot-tag{font-size:.85rem;color:var(--text2);line-height:1.7;max-width:280px}
+.disclaimer{background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:6px;padding:1rem 1.25rem;font-size:.75rem;color:var(--text3);line-height:1.65}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.75rem;padding-top:1.5rem;border-top:1px solid var(--border);
+  font-family:var(--mono);font-size:.7rem;color:var(--text3)}
+
+/* ── Utils ────────────────────────────────────────────────────── */
+.center{text-align:center}
+.mxa{margin-left:auto;margin-right:auto}
+.mb1{margin-bottom:.25rem}.mb2{margin-bottom:.5rem}.mb3{margin-bottom:.75rem}
+.mb4{margin-bottom:1rem}.mb6{margin-bottom:1.5rem}.mb8{margin-bottom:2rem}
+.mt4{margin-top:1rem}.mt6{margin-top:1.5rem}.mt8{margin-top:2rem}
+.fire{color:var(--fire)}.green{color:var(--green)}.amber{color:var(--amber)}
+
+/* ── Scroll Reveal ────────────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(24px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-24px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv-l.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
+
+/* ── Hover Underline ──────────────────────────────────────────── */
+.hover-under{position:relative;display:inline-block}
+.hover-under::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--fire);transition:width .3s}
+.hover-under:hover::after{width:100%}
+
+/* ═══════════════════════════════════════════════════════════════
+   EMBER BACKGROUND — Braise, fumée et braises incandescentes
+═══════════════════════════════════════════════════════════════ */
+
+/* Global page ember atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 40% at 50% 100%,
+      rgba(120,30,0,.55) 0%,
+      rgba(60,10,0,.35) 35%,
+      transparent 70%),
+    radial-gradient(ellipse 80% 30% at 20% 100%,
+      rgba(180,50,0,.2) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 30% at 80% 100%,
+      rgba(160,40,0,.2) 0%, transparent 60%);
+}
+
+/* Ember glow at bottom — the "sleeping" embers */
+.ember-floor {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ember-floor::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 100%;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 100%,
+      rgba(180,50,0,.45) 0%,
+      rgba(120,30,0,.3) 40%,
+      transparent 80%),
+    radial-gradient(ellipse 50% 40% at 25% 100%,
+      rgba(200,70,0,.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 75% 100%,
+      rgba(200,70,0,.25) 0%, transparent 70%);
+  animation: emberGlow 4s ease-in-out infinite alternate;
+}
+@keyframes emberGlow {
+  0%   { opacity: .7; filter: blur(8px); }
+  50%  { opacity: 1;  filter: blur(6px); }
+  100% { opacity: .6; filter: blur(10px); }
+}
+
+/* Individual floating ember particles */
+.embers-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Smoke wisps rising */
+.smoke-wrap {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.smoke {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0;
+  animation: smokeRise var(--dur, 14s) ease-out var(--delay, 0s) infinite;
+  background: radial-gradient(circle,
+    rgba(60,30,15,.18) 0%,
+    rgba(40,20,10,.08) 50%,
+    transparent 80%);
+}
+@keyframes smokeRise {
+  0%   { transform: translateY(0) translateX(0) scale(.4);  opacity: 0; }
+  5%   { opacity: .35; }
+  40%  { opacity: .2; }
+  80%  { opacity: .08; transform: translateY(-80vh) translateX(var(--drift,20px)) scale(2.5); }
+  100% { opacity: 0;  transform: translateY(-100vh) translateX(var(--drift2,40px)) scale(3.5); }
+}
+
+
+/* Market status indicator */
+.mkt-status{display:inline-flex;align-items:center;gap:.3rem;
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;
+  padding:.15rem .45rem;border-radius:2px;margin-top:.2rem}
+.mkt-open{background:rgba(0,212,170,.1);color:var(--green);border:1px solid rgba(0,212,170,.2)}
+.mkt-closed{background:rgba(255,71,87,.1);color:var(--red);border:1px solid rgba(255,71,87,.2)}
+.mkt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.mkt-open .mkt-dot{background:var(--green);animation:livePing 1.5s infinite}
+.mkt-closed .mkt-dot{background:var(--red)}
+
+</style>
+</head>
+<body>
+<!-- Cursor -->
+
+<!-- ── Ember background elements ────────────────────────────────────── -->
+<div class="ember-floor"></div>
+<canvas class="embers-canvas" id="embers-canvas"></canvas>
+<div class="smoke-wrap" id="smoke-wrap"></div>
+<canvas id="hero-candles" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.45;z-index:0"></canvas>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ── Ticker ─────────────────────────────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-track" id="tk"></div>
+</div>
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header class="hdr" id="hdr">
+  <div class="hdr-inner">
+    <a class="logo" href="#">
+      <svg class="logo-icon" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg1" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#DC2626"/><stop offset="50%" stop-color="#EA580C"/><stop offset="100%" stop-color="#F59E0B"/>
+          </linearGradient>
+          <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FBBF24"/><stop offset="100%" stop-color="#F97316"/>
+          </linearGradient>
+        </defs>
+        <rect x="110" y="228" width="28" height="60" rx="4" fill="#B91C1C"/>
+        <rect x="148" y="198" width="28" height="90" rx="4" fill="#DC2626"/>
+        <rect x="186" y="158" width="28" height="130" rx="4" fill="url(#lg1)"/>
+        <rect x="224" y="178" width="28" height="110" rx="4" fill="#EA580C"/>
+        <rect x="262" y="208" width="28" height="80" rx="4" fill="#F59E0B"/>
+        <g transform="translate(200,100)"><polygon points="0,-32 -18,-10 -8,-10 -8,8 8,8 8,-10 18,-10" fill="url(#lg2)"/></g>
+      </svg>
+      <span class="logo-name">EMBER<span>TRADING</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <button class="nav-btn" onclick="go('apropos')" data-fr="À propos" data-en="About">À propos</button>
+      <button class="nav-btn" onclick="go('programme')" data-fr="Programme" data-en="Program">Programme</button>
+      <button class="nav-btn" onclick="go('indicateurs')" data-fr="Indicateurs" data-en="Indicators">Indicateurs</button>
+      <button class="nav-btn nav-vip" onclick="go('vip')" data-fr="VIP" data-en="VIP">VIP</button>
+      <button class="nav-btn" onclick="go('contact')" data-fr="Contact" data-en="Contact">Contact</button>
+    </nav>
+    <div class="hdr-right">
+      <button class="lang-btn" id="lang-btn" onclick="toggleLang()">🌐 EN</button>
+      <button class="cta-hdr" onclick="go('pricing')" data-i18n="hero-btn1">Commencer →</button>
+      <button class="ham" id="ham" onclick="document.getElementById('nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
+<section class="hero" style="margin-top:35px">
+  <div class="hero-mesh"></div>
+
+  <div class="wrap hero-wrap">
+
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="live-pulse"></span>
+        <span data-i18n="hero-badge">Formation complète Forex, Commodités &amp; Métaux</span>
+      </div>
+      <h1>
+        <span class="h1-line">DU CHAOS</span>
+        <span class="h1-line h1-fire" data-text="À LA CONSISTANCE" data-i18n-custom="hero-h1-fire">À LA</span>
+        <span class="h1-line" style="color:var(--fire)">CONSISTANCE</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero-desc">Maîtrisez le trading sur tous les marchés avec une formation structurée, un mental en béton et un accompagnement direct.</p>
+      <div class="hero-btns">
+        <button class="btn-fire" onclick="go('pricing')"><span data-i18n="hero-btn1">Commencer maintenant →</span></button>
+        <button class="btn-ghost" onclick="go('programme')"><span data-i18n="hero-btn2">Voir le programme</span></button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-n" id="s1">0</div>
+          <div class="stat-l" data-i18n="hero-stat1">Phases d'apprentissage</div>
+        </div>
+        <div>
+          <div class="stat-n" id="s2">0</div>
+          <div class="stat-l" data-i18n="hero-stat2">Mois d'accompagnement</div>
+        </div>
+        <div>
+          <div class="stat-n" id="s3">0+</div>
+          <div class="stat-l" data-i18n="hero-stat3">Ans de connaissance</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — dual animated chart widgets -->
+    <div class="hero-right">
+      <!-- XAUUSD -->
+      <div class="chart-widget">
+        <div class="cw-head">
+          <div>
+            <div class="cw-pair">XAU<span style="color:var(--text2)">USD</span></div>
+            <div style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">Gold / US Dollar</div>
+            <div class="mkt-status mkt-open" id="xau-status"><span class="mkt-dot"></span><span id="xau-status-txt">LIVE</span></div>
+          </div>
+          <div style="text-align:right">
+            <div class="cw-price cw-up" id="xau-price">4 493.00</div>
+            <div class="cw-change cw-up" id="xau-chg">▲ +114.86 (+2.62%)</div>
+          </div>
+          <span class="cw-badge cm">COMMODITY</span>
+        </div>
+        <div class="cw-body">
+          <canvas class="candle-chart" id="cv-xau" width="400" height="110"></canvas>
+        </div>
+        <div class="ohlc-row">
+          <div class="ohlc-cell"><div class="ohlc-lbl">OPEN</div><div class="ohlc-val" id="xau-o">4 378.14</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">HIGH</div><div class="ohlc-val up" id="xau-h">4 556.15</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">LOW</div><div class="ohlc-val dn" id="xau-l">4 375.49</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">VOL</div><div class="ohlc-val">142K</div></div>
+        </div>
+      </div>
+
+      <!-- XAGUSD -->
+      <div class="chart-widget">
+        <div class="cw-head">
+          <div>
+            <div class="cw-pair">XAG<span style="color:var(--text2)">USD</span></div>
+            <div style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">Silver / US Dollar</div>
+            <div class="mkt-status mkt-open" id="xag-status"><span class="mkt-dot"></span><span id="xag-status-txt">LIVE</span></div>
+          </div>
+          <div style="text-align:right">
+            <div class="cw-price cw-up" id="xag-price">74.21</div>
+            <div class="cw-change cw-up" id="xag-chg">▲ +1.40 (+1.92%)</div>
+          </div>
+          <span class="cw-badge cm">METAL</span>
+        </div>
+        <div class="cw-body">
+          <canvas class="candle-chart" id="cv-xag" width="400" height="110"></canvas>
+        </div>
+        <div class="ohlc-row">
+          <div class="ohlc-cell"><div class="ohlc-lbl">OPEN</div><div class="ohlc-val" id="xag-o">72.81</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">HIGH</div><div class="ohlc-val up" id="xag-h">74.56</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">LOW</div><div class="ohlc-val dn" id="xag-l">72.03</div></div>
+          <div class="ohlc-cell"><div class="ohlc-lbl">VOL</div><div class="ohlc-val">87K</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ABOUT ───────────────────────────────────────────────────────────────── -->
+<section id="apropos">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv-l">
+        <div class="sec-tag" data-i18n="apropos-title">À propos</div>
+        <h2 class="sec-title" data-i18n="apropos-subtitle">Trader indépendant – Samuel D'amours</h2>
+        <table class="info-table">
+          <tr><td>Statut</td><td><span class="fire">●</span> <span data-i18n="apropos-since">Passionné des marchés financiers depuis début 2019</span></td></tr>
+          <tr><td>Performance</td><td class="fire-val" data-i18n="apropos-profitable">Profitable de manière consistante depuis 3 ans</td></tr>
+          <tr><td>Marchés</td><td>Forex · XAUUSD · XAGUSD · Commodités</td></tr>
+          <tr><td>Style</td><td>Scalping · Day Trading</td></tr>
+          <tr><td>Plateforme</td><td>MetaTrader 5 · TradingView</td></tr>
+        </table>
+        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:1.25rem" data-i18n="apropos-p1">J'ai commencé à m'intéresser sérieusement au trading en 2019...</p>
+        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:.6rem" data-i18n="apropos-p2">Fondateur d'EmberTrading...</p>
+        <div class="phil-card mt4">
+          <div class="phil-lbl" data-i18n="apropos-philo-label">💡 Philosophie</div>
+          <p class="phil-txt" data-i18n="apropos-philo-text">80% mental, 20% technique...</p>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="sec-tag" data-i18n="diff-title">Ce qui rend cette formation différente</div>
+        <div class="feat-grid mt4">
+          <div class="feat-cell d1"><div class="feat-ico">🚫</div><div class="feat-title" data-i18n="diff-1-title">Pas de technique à la mode</div><div class="feat-txt" data-i18n="diff-1-text">Nous vous apportons les outils...</div></div>
+          <div class="feat-cell d2"><div class="feat-ico">🧠</div><div class="feat-title" data-i18n="diff-2-title">L'importance de la psychologie</div><div class="feat-txt" data-i18n="diff-2-text">Nous mettons beaucoup l'emphase...</div></div>
+          <div class="feat-cell d3"><div class="feat-ico">⚡</div><div class="feat-title" data-i18n="diff-3-title">Apprentissage par la pratique</div><div class="feat-txt" data-i18n="diff-3-text">Défi démo concret...</div></div>
+          <div class="feat-cell d4"><div class="feat-ico">🎯</div><div class="feat-title" data-i18n="diff-4-title">Accompagnement personnalisé</div><div class="feat-txt" data-i18n="diff-4-text">Feedback sans jugement...</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PROGRAMME ──────────────────────────────────────────────────────────── -->
+<section id="programme" class="prog-bg">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+      <div class="rv">
+        <div class="sec-tag">Programme</div>
+        <h2 class="sec-title" data-i18n="prog-title">Le programme en 3 phases</h2>
+      </div>
+      <button class="btn-fire rv d2" onclick="go('pricing')" style="margin-top:.5rem"><span data-i18n="hero-btn1">Commencer maintenant →</span></button>
+    </div>
+    <div class="phase-list">
+      <div class="phase rv d1">
+        <div class="phase-l"><div class="phase-num">01</div><div class="phase-vert"></div></div>
+        <div class="phase-r">
+          <div class="phase-label" data-i18n="phase1-label">Phase 1</div>
+          <div class="phase-name" data-i18n="phase1-title">Les bases solides et survie</div>
+          <div class="phase-dur" data-i18n="phase1-duration">2 à 6 semaines</div>
+          <ul class="phase-items">
+            <li data-i18n="phase1-item1">Lire un graphique (tendance, supports/résistances, bougies)</li>
+            <li data-i18n="phase1-item2">Maîtriser MetaTrader 5, ordres, levier, calcul de lot</li>
+            <li data-i18n="phase1-item3">Comprendre les sessions (Asia, Europe, US)</li>
+            <li data-i18n="phase1-item4">Identifier les heures d'ouverture optimales pour chaque paire/marché</li>
+            <li data-i18n="phase1-item5">Comprendre accumulation/manipulation/distribution</li>
+            <li data-i18n="phase1-item6">Astuce: repérer les zones d'accumulation</li>
+            <li data-i18n="phase1-item7">Défi démo clé: +1 000$ net sur 10k sans descendre sous 9k</li>
+          </ul>
+          <span class="phase-goal" data-i18n="phase1-goal">Objectif: Apprendre les bases du trading</span>
+        </div>
+      </div>
+      <div class="phase rv d2">
+        <div class="phase-l"><div class="phase-num">02</div><div class="phase-vert"></div></div>
+        <div class="phase-r">
+          <div class="phase-label" data-i18n="phase2-label">Phase 2</div>
+          <div class="phase-name" data-i18n="phase2-title">Forger le mental et discipline</div>
+          <div class="phase-dur" data-i18n="phase2-duration">Semaines 4 à 8</div>
+          <ul class="phase-items">
+            <li data-i18n="phase2-item1">Gestion du risque: 1-2% max par trade</li>
+            <li data-i18n="phase2-item2">Contrôler les émotions: pas de revenge, pause après 3 pertes</li>
+            <li data-i18n="phase2-item3">Analyse top-down: H4 → timeframes inférieurs</li>
+            <li data-i18n="phase2-item4">Zones de liquidité, anciens swing highs/lows</li>
+            <li data-i18n="phase2-item5">Trader pendant les sessions optimales</li>
+            <li data-i18n="phase2-item6">Style recommandé: petits mouvements fréquents</li>
+          </ul>
+          <span class="phase-goal" data-i18n="phase2-goal">Objectif: Trader un processus, pas vos émotions</span>
+        </div>
+      </div>
+      <div class="phase rv d3">
+        <div class="phase-l"><div class="phase-num" style="color:var(--amber);opacity:.4">03</div></div>
+        <div class="phase-r" style="border-bottom:none;padding-bottom:0">
+          <div class="phase-label" style="color:var(--amber)" data-i18n="phase3-label">Phase 3</div>
+          <div class="phase-name" data-i18n="phase3-title">Passage réel et scaling</div>
+          <div class="phase-dur" data-i18n="phase3-duration">Après 6-12 semaines</div>
+          <ul class="phase-items">
+            <li data-i18n="phase3-item1">Passage à la réalité: Prop firm ou compte live</li>
+            <li data-i18n="phase3-item2">Journal de trading continu et feedback personnalisé</li>
+            <li data-i18n="phase3-item3">Soutien 6 mois: questions illimitées, revue de charts</li>
+            <li data-i18n="phase3-item4">Optimisation des sessions: vos meilleures heures</li>
+            <li data-i18n="phase3-item5">Accompagnement psychologique et conseils de scaling</li>
+            <li style="color:var(--fire)" data-i18n="phase3-item6">Mon edge personnel: ma technique de trading</li>
+            <li style="color:var(--fire)" data-i18n="phase3-item7">Mon indicateur personnel codé que j'utilise</li>
+          </ul>
+          <span class="phase-goal" style="color:var(--amber);border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.06)" data-i18n="phase3-goal">Objectif: Prouver que vous tenez en conditions réelles</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PRICING ─────────────────────────────────────────────────────────────── -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="center mb8 rv">
+      <div class="sec-tag" style="justify-content:center" data-i18n="pricing-title">Deux chemins vers la rentabilité</div>
+      <h2 class="sec-title" data-i18n="pricing-title">Deux chemins vers la rentabilité</h2>
+      <p style="font-size:.9rem;color:var(--text2);max-width:520px;margin:.6rem auto 0;line-height:1.7" data-i18n="pricing-subtitle">Les deux plans incluent une formation solide. La différence? Le coaching personnel et les outils secrets.</p>
+    </div>
+    <div class="price-grid rv">
+      <div class="price-col">
+        <div class="p-label">Formation</div>
+        <div class="p-name" data-i18n="compact-title">Formation Compacte</div>
+        <div class="p-desc" data-i18n="compact-desc">Formation compacte et essentielle pour débuter</div>
+        <div class="p-price">500$</div>
+        <div class="p-once" data-i18n="compact-payment">Paiement unique · Accès illimité</div>
+        <ul class="p-items">
+          <li data-i18n="compact-item1">Les 3 phases du programme (version compacte)</li>
+          <li data-i18n="compact-item2">Fondamentaux multi-marchés: graphiques, supports/résistances, bougies</li>
+          <li data-i18n="compact-item3">Maîtrise MetaTrader 5, ordres, levier, gestion du risque</li>
+          <li data-i18n="compact-item4">Défis démo + journal d'apprentissage structuré</li>
+          <li data-i18n="compact-item5">Mental et discipline: gérer les émotions, patience, stop loss</li>
+          <li data-i18n="compact-item6">Support direct - je reste présent pour répondre à vos questions</li>
+        </ul>
+        <div class="p-sep"></div>
+        <ul class="p-items" style="font-size:.8rem">
+          <li class="dim" data-i18n="compact-diff1">Pas de coaching personnalisé approfondi</li>
+          <li class="dim" data-i18n="compact-diff2">Pas accès à ma technique de trading personnelle</li>
+          <li class="dim" data-i18n="compact-diff3">Pas accès à mon indicateur propriétaire</li>
+          <li class="dim" data-i18n="compact-diff4">Moins de contenu et d'outils avancés</li>
+        </ul>
+        <a href="https://buy.stripe.com/8x2eVcfwifmB6fs7QX4ko00" target="_blank" class="btn-buy btn-buy-out"><span data-i18n="compact-btn2">Acheter maintenant - 500$ →</span></a>
+        <a href="https://buy.stripe.com/8x2eVcfwifmB6fs7QX4ko00" target="_blank" class="btn-buy btn-buy-out" style="margin-top:.4rem;font-size:.72rem;opacity:.6"><span data-i18n="compact-btn1">En savoir plus →</span></a>
+      </div>
+      <div class="price-col hot">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem">
+          <div class="p-label">Formation</div>
+          <span class="p-badge" data-i18n="recommended">⭐ RECOMMANDÉ</span>
+        </div>
+        <div class="p-name" style="color:var(--fire)" data-i18n="complete-title">Formation Complète</div>
+        <div class="p-desc" data-i18n="complete-desc">Contenu approfondi, coaching personnel et tous mes outils</div>
+        <div class="p-price">1000$</div>
+        <div class="p-once" data-i18n="complete-payment">Paiement unique · Accès illimité + Coaching 6 mois</div>
+        <ul class="p-items">
+          <li data-i18n="complete-item1">Les 3 phases complètes avec beaucoup plus de contenu</li>
+          <li data-i18n="complete-item2">Formation adaptée au total débutant ET aux traders avancés</li>
+          <li data-i18n="complete-item3">Maîtrise avancée: graphiques, patterns, zones de liquidité</li>
+          <li data-i18n="complete-item4">Gestion mentale et psychologique du trading (approfondie)</li>
+          <li data-i18n="complete-item5">🔐 Mon edge personnel (technique et gestion psychologique)</li>
+          <li data-i18n="complete-item6">🤖 Mon indicateur propriétaire que j'utilise</li>
+          <li data-i18n="complete-item7">Coaching personnalisé 6 mois</li>
+          <li data-i18n="complete-item8">Revue complète de vos trades réels</li>
+          <li data-i18n="complete-item9">Accès direct avec questions illimitées</li>
+          <li data-i18n="complete-item10">Support psychologique et conseils de scaling</li>
+          <li data-i18n="complete-item11">📢 Groupe VIP Telegram — positions daily envoyées en direct</li>
+        </ul>
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--fire);margin:.5rem 0" data-i18n="complete-indicator-label">🤖 L'indicateur propriétaire est inclus dans le prix</div>
+        <div style="font-family:var(--mono);font-size:.68rem;color:var(--text3);margin-bottom:.75rem" data-i18n="complete-indicator-text">Formation complète sur son utilisation quotidienne</div>
+        <a href="https://buy.stripe.com/8x2eVcfwifmB6fs7QX4ko00" target="_blank" class="btn-buy btn-buy-fire"><span data-i18n="complete-btn">Acheter maintenant - 1000$ →</span></a>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:.78rem;color:var(--text2);text-align:center;margin-top:1rem;padding:.75rem;background:var(--surf);border-radius:4px" class="rv" data-i18n="pricing-note">
+      <span style="color:var(--fire);font-weight:600">Les deux offres couvrent les 3 phases du programme.</span> La Compacte est compacte avec l'essentiel, la Complète ajoute coaching personnalisé + mes outils secrets.
+    </div>
+    <!-- Compare -->
+    <table class="compare-table rv mt8">
+      <thead><tr>
+        <th data-i18n="compare-title">Résumé</th>
+        <th data-i18n="compare-compact-title">Compacte - 500$</th>
+        <th style="color:var(--fire)" data-i18n="compare-complete-title">Complète - 1000$</th>
+      </tr></thead>
+      <tbody>
+        <tr><td data-i18n="compare-compact1">Vous êtes débutant et voulez apprendre les bases solides</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-compact2">Vous pouvez être autonome et vous engager sérieusement</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-compact3">Vous voulez une formation compacte et essentielle</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+        <tr><td data-i18n="compare-compact4">Vous avez un budget restreint</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+        <tr><td data-i18n="compare-complete1">Vous voulez les résultats les plus rapides possibles</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-complete2">Vous voulez du feedback personnel et coaching direct</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-complete3">Vous voulez accès à mes outils (edge et indicateur)</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-complete4">Vous voulez une véritable relation de mentorat 6 mois</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-complete5">Vous êtes prêt à investir pour transformer votre vie</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td data-i18n="compare-complete6">Accès au groupe VIP Telegram (positions daily)</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── INDICATORS ──────────────────────────────────────────────────────────── -->
+<section id="indicateurs" class="ind-bg">
+  <div class="wrap">
+    <div class="center mb8 rv">
+      <div class="sec-tag" style="justify-content:center" data-i18n="tools-title">Les outils que j'utilise</div>
+      <h2 class="sec-title" data-i18n="tools-title">Les outils que j'utilise</h2>
+      <p style="font-size:.9rem;color:var(--text2);max-width:480px;margin:.6rem auto 0;line-height:1.7" data-i18n="tools-subtitle">Les outils et stratégies qui me permettent d'être rentable et consistant</p>
+    </div>
+    <div class="ind-grid rv">
+      <div class="ind">
+        <div class="ind-top"><span class="ind-name">Support &amp; Resistance<br>Power Zones</span><div class="ind-tags"><span class="ind-tag">Zones S/R</span><span class="ind-tag">FVG</span></div></div>
+        <p class="ind-desc" data-i18n="ind1-desc">Identifie automatiquement les zones de <strong style="color:var(--green)">support (vert)</strong> et <strong style="color:var(--red)">résistance (rouge)</strong> à partir du plus haut et du plus bas d'une période.</p>
+        <ul class="ind-feats">
+          <li data-i18n="ind1-item1">Buy/Sell Power – dominance acheteurs/vendeurs en temps réel</li>
+          <li data-i18n="ind1-item2">Signaux de breakout – détection automatique lors des cassures</li>
+          <li data-i18n="ind1-item3">Fair Value Gaps (FVG) – détection sur 5 min et 15 min</li>
+        </ul>
+        <div class="ind-bot">
+          <div><div class="ind-price">300$</div><div class="ind-acc" data-i18n="ind1-access">Accès illimité</div></div>
+          <a href="https://buy.stripe.com/8x29ASgAmeix9rE2wD4ko01" target="_blank" class="btn-ind btn-ind-sec"><span data-i18n="ind1-btn">Acheter – 300$ →</span></a>
+        </div>
+      </div>
+      <div class="ind">
+        <div class="ind-top"><span class="ind-name">Trendline Fusion</span><div class="ind-tags"><span class="ind-tag">Trendlines</span><span class="ind-tag g">Break &amp; Bounce</span></div></div>
+        <p class="ind-desc" data-i18n="ind2-desc">Trace automatiquement des trendlines à partir des pivots du marché. Des zones <strong style="color:var(--green)">vertes (hausse)</strong> et <strong style="color:var(--red)">rouges (baisse)</strong> s'ajustent à la volatilité.</p>
+        <ul class="ind-feats">
+          <li data-i18n="ind2-item1">Cassures détectées – signaux BREAK BULLISH / BEARISH automatiques</li>
+          <li data-i18n="ind2-item2">Rebonds identifiés – signaux BUY/SELL sur les lignes de tendance</li>
+          <li data-i18n="ind2-item3">Target &amp; Stop Loss – calculés automatiquement lors d'un BREAK</li>
+          <li data-i18n="ind2-item4">Swing highs/lows – affichage 5 min, graphique clair</li>
+        </ul>
+        <div class="ind-bot">
+          <div><div class="ind-price">300$</div><div class="ind-acc" data-i18n="ind1-access">Accès illimité</div></div>
+          <a href="https://buy.stripe.com/8x29ASgAmeix9rE2wD4ko01" target="_blank" class="btn-ind btn-ind-sec"><span data-i18n="ind2-btn">Acheter – 300$ →</span></a>
+        </div>
+      </div>
+      <div class="ind featured">
+        <div class="ind-top">
+          <div><div style="font-family:var(--mono);font-size:.62rem;color:var(--fire);margin-bottom:.2rem" data-i18n="combo-save">🔥 ÉCONOMISEZ 100$</div><span class="ind-name" style="color:var(--fire)" data-i18n="combo-title">Combo Indicateur</span></div>
+          <div class="ind-tags"><span class="ind-tag">Bundle</span></div>
+        </div>
+        <p class="ind-desc" data-i18n="combo-desc">Obtenez les deux indicateurs ensemble et économisez 100$. Le duo parfait pour maximiser votre avantage sur les marchés.</p>
+        <ul class="ind-feats">
+          <li data-i18n="combo-item1">Support &amp; Resistance Power Zones</li>
+          <li data-i18n="combo-item2">Trendline Fusion</li>
+          <li data-i18n="combo-item3">Accès illimité aux deux outils</li>
+        </ul>
+        <div class="ind-bot">
+          <div>
+            <div class="ind-price">500$</div>
+            <div class="ind-acc" style="text-decoration:line-through" data-i18n="combo-old-price">600$ séparément</div>
+          </div>
+          <a href="https://buy.stripe.com/5kQ8wOese6Q5avI2wD4ko02" target="_blank" class="btn-ind btn-ind-fire"><span data-i18n="combo-btn">Acheter le Combo →</span></a>
+        </div>
+      </div>
+    </div>
+    <p class="center" style="font-family:var(--mono);font-size:.75rem;color:var(--text2)" data-i18n="ind-note">Les deux indicateurs sont aussi <strong style="color:var(--fire)">inclus gratuitement</strong> avec la Formation Complète à 1000$</p>
+    <div class="tools-grid mt8 rv">
+      <div class="tool">
+        <div class="tool-ico">🔐</div>
+        <div class="tool-name" data-i18n="tools-edge-title">Mon Edge Personnel</div>
+        <p class="tool-txt" data-i18n="tools-edge-text">Ma technique de trading combinant l'analyse technique avancée et la gestion psychologique du risque...</p>
+        <div class="tool-badge">✓ <span data-i18n="tools-edge-label">Inclus à la Formation Complète</span></div>
+        <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.2rem" data-i18n="tools-edge-sublabel">La fondation de ma rentabilité</div>
+      </div>
+      <div class="tool">
+        <div class="tool-ico">🤖</div>
+        <div class="tool-name" data-i18n="tools-ind-title">Mon Indicateur Propriétaire</div>
+        <p class="tool-txt" data-i18n="tools-ind-text">Un outil que j'ai développé et optimisé au fil des années de trading réel...</p>
+        <div class="tool-badge">✓ <span data-i18n="tools-ind-label">Inclus à la Formation Complète</span></div>
+        <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.2rem" data-i18n="tools-ind-sublabel">Formation complète sur son utilisation quotidienne</div>
+      </div>
+    </div>
+    <p class="center mt4" style="font-size:.88rem;color:var(--text2)" data-i18n="tools-cta">Ces deux outils combinés = <strong style="color:var(--fire)">ta méthode personnalisée pour être profitable et consistant</strong></p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── VIP ──────────────────────────────────────────────────────────────────── -->
+<section id="vip" class="vip-bg">
+  <div class="wrap">
+    <div class="center mb8 rv">
+      <div class="sec-tag" style="justify-content:center">VIP</div>
+      <h2 class="sec-title" data-i18n="vip-title">Groupe VIP Telegram</h2>
+      <p style="font-size:.9rem;color:var(--text2);max-width:420px;margin:.5rem auto 0" data-i18n="vip-subtitle">Recevez mes positions daily en direct sur Telegram.</p>
+    </div>
+    <div class="vip-wrap rv">
+      <div class="vip-box">
+        <div class="vip-ico">📢</div>
+        <p class="vip-txt" data-i18n="vip-desc">Pour avoir accès au groupe VIP et recevoir mes positions daily, rejoignez d'abord le groupe Telegram gratuit puis contactez-moi directement en mentionnant&nbsp;<strong style="color:var(--fire);white-space:nowrap">«&nbsp;VIP&nbsp;»</strong>.</p>
+        <a href="https://t.me/yashysako" target="_blank" class="btn-fire" style="display:inline-flex"><span data-i18n="vip-btn">Rejoindre le groupe Telegram →</span></a>
+        <div class="vip-mgmt-row mt6">
+          <span class="vip-mgmt-ico">🔐</span>
+          <div>
+            <div class="vip-mgmt-name" data-i18n="vip-mgmt-title">Management de compte MT5 — VIP exclusif</div>
+            <div class="vip-mgmt-desc" data-i18n="vip-mgmt-desc">Je gère votre compte MT5 directement pour les membres VIP. Contactez-moi sur Telegram pour plus d'informations.</div>
+          </div>
+        </div>
+        <p class="vip-note" data-i18n="vip-note">💡 Inclus gratuitement avec la Formation Complète à 1000$</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── FAQ ──────────────────────────────────────────────────────────────────── -->
+<section id="faq">
+  <div class="wrap" style="max-width:820px">
+    <div class="center mb6 rv">
+      <div class="sec-tag" style="justify-content:center">FAQ</div>
+      <h2 class="sec-title" data-i18n="faq-title">Questions Fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item rv d1"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq1-q">Quel est le capital minimum pour commencer?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq1-a">Pour la Phase Démo, zéro capital requis...</div></div></div>
+      <div class="faq-item rv d2"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq2-q">Combien de temps avant de devenir rentable?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq2-a">Cela dépend de votre engagement...</div></div></div>
+      <div class="faq-item rv d3"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq3-q">La formation couvre-t-elle plusieurs marchés ou juste le Forex?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq3-a">La formation couvre tous les marchés...</div></div></div>
+      <div class="faq-item rv d4"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq4-q">Quelle est la différence entre Formation Compacte et Formation Complète?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq4-a">La Formation Compacte vous enseigne...</div></div></div>
+      <div class="faq-item rv d5"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq5-q">Avez-vous des garanties de profit ou de remboursement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq5-a">Non. Le trading comporte des risques...</div></div></div>
+      <div class="faq-item rv d6"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq6-q">Quel broker/plateforme recommandez-vous?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq6-a">Je recommande MetaTrader 5 (MT5)...</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq7-q">Dois-je avoir des connaissances préalables en trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq7-a">Non! La formation est conçue...</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq8-q">Combien de temps par jour dois-je consacrer au trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq8-a">Avec ma méthode, vous pouvez trader...</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq9-q">L'accompagnement 6 mois signifie quoi exactement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq9-a">Pour la Formation Complète: 6 mois d'accès direct...</div></div></div>
+    </div>
+    <div class="center mt6" style="font-size:.88rem;color:var(--text2)">
+      <span data-i18n="faq-cta">D'autres questions?</span>
+      <a href="https://t.me/yashysako" target="_blank" style="color:var(--fire);font-weight:600;text-decoration:none;margin-left:.4rem" data-i18n="faq-cta-link">Contactez-moi directement →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── DOCS ─────────────────────────────────────────────────────────────────── -->
+<section class="docs-bg">
+  <div class="wrap">
+    <div class="center mb8 rv">
+      <div class="sec-tag" style="justify-content:center">Documents</div>
+      <h2 class="sec-title" data-i18n="docs-title">Comment accéder à votre formation?</h2>
+    </div>
+    <div class="steps rv">
+      <div class="step d1"><div class="step-n">01</div><div class="step-name" data-i18n="docs-step1-title">Effectuez le paiement</div><p class="step-txt" data-i18n="docs-step1-text">Cliquez sur "Acheter maintenant" et complétez le paiement sécurisé via Stripe.</p></div>
+      <div class="step d2"><div class="step-n">02</div><div class="step-name" data-i18n="docs-step2-title">Recevez les documents</div><p class="step-txt" data-i18n="docs-step2-text">Après le paiement, les documents Word de votre formation sont envoyés à votre email automatiquement.</p></div>
+      <div class="step d3"><div class="step-n">03</div><div class="step-name" data-i18n="docs-step3-title">Accédez au cloud</div><p class="step-txt" data-i18n="docs-step3-text">Les documents sont sur un cloud gratuit. Aucun besoin de payer ou télécharger Word.</p></div>
+    </div>
+    <div style="background:rgba(22,30,40,0.55);backdrop-filter:blur(6px);border:1px solid var(--border);border-radius:6px;padding:1.5rem 2rem" class="rv">
+      <div style="font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--fire);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase" data-i18n="docs-about-title">📋 À propos de vos documents</div>
+      <div class="docs-list">
+        <div class="doc-item" data-i18n="docs-item1"><strong>Format Word:</strong> .docx lisible partout</div>
+        <div class="doc-item" data-i18n="docs-item2"><strong>Pas besoin de payer:</strong> Accès gratuit au cloud</div>
+        <div class="doc-item" data-i18n="docs-item3"><strong>Accès en ligne:</strong> Depuis n'importe quel appareil</div>
+        <div class="doc-item" data-i18n="docs-item4"><strong>Accès illimité:</strong> Accès à vie une fois payé</div>
+        <div class="doc-item" data-i18n="docs-item5"><strong>Téléchargement optionnel:</strong> Sauvegardez si souhaité</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CONTACT ─────────────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="wrap" style="max-width:820px">
+    <div class="center mb6 rv">
+      <div class="sec-tag" style="justify-content:center">Contact</div>
+      <h2 class="sec-title" data-i18n="contact-title">Prêt à commencer?</h2>
+      <p style="font-size:.9rem;color:var(--text2);margin-top:.5rem" data-i18n="contact-subtitle">Contactez-moi directement pour démarrer votre formation.</p>
+    </div>
+    <div class="free-banner rv">
+      <div>
+        <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem" data-i18n="contact-tg-free">Groupe Telegram Gratuit</div>
+        <div class="free-txt" data-i18n="contact-tg-free-desc">Rejoignez pour des prédictions et analyses chaque semaine</div>
+      </div>
+      <a href="https://t.me/+c2QcRgUMCZc3NDUx" target="_blank" class="btn-ghost" style="white-space:nowrap" data-i18n="contact-tg-free-link">Totalement gratuit - Cliquez pour rejoindre →</a>
+    </div>
+    <div class="contact-grid mt4 rv">
+      <div class="c-card">
+        <div class="c-lbl" data-i18n="contact-email-label">Email direct</div>
+        <div class="c-val">neodtrading@gmail.com</div>
+        <p class="c-desc" data-i18n="contact-mention">Mentionne "Formation Trading" pour une réponse plus rapide</p>
+        <a href="mailto:neodtrading@gmail.com" class="btn-buy btn-buy-out" data-i18n="contact-btn2">Envoyer un email →</a>
+      </div>
+      <div class="c-card hot">
+        <div class="c-lbl" data-i18n="contact-tg-label">Telegram (plus rapide)</div>
+        <div class="c-val">@yashysako</div>
+        <p class="c-desc" data-i18n="contact-mention">Mentionne "Formation Trading" pour une réponse plus rapide</p>
+        <a href="https://t.me/yashysako" target="_blank" class="btn-buy btn-buy-fire" data-i18n="contact-btn3">Ouvrir Telegram →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <div class="foot-brand-name">EMBER<span>TRADING</span></div>
+        <p class="foot-tag">
+          <span data-i18n="footer-tagline">Si vous êtes patient, discipliné et prêt à travailler votre mental...</span><br>
+          <span style="color:var(--fire)" data-i18n="footer-cta">Cette formation vous met sur les rails pour devenir rentable et consistant.</span>
+        </p>
+      </div>
+      <div class="disclaimer">
+        <strong data-i18n="footer-disclaimer-title">Clause de non-responsabilité :</strong>
+        <span data-i18n="footer-disclaimer"> Les analyses partagées le sont à titre informatif et éducatif uniquement...</span>
+        <br><strong data-i18n="footer-risk">Risque élevé : Le trading sur le Forex comporte des risques importants...</strong>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer-copy">© Samuel D'amours/EmberTrading, 2026. Tous droits réservés.</span>
+      <span>neodtrading@gmail.com · @yashysako</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Cursor ─────────────────────────────────────────────────────
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function trackRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(trackRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='50px';ring.style.height='50px';ring.style.opacity='.5';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='34px';ring.style.height='34px';ring.style.opacity='1';});
+});
+
+// ── Nav ─────────────────────────────────────────────────────────
+function go(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});document.getElementById('nav').classList.remove('open');}
+window.addEventListener('scroll',()=>document.getElementById('hdr').classList.toggle('solid',scrollY>50));
+
+// ── FAQ ─────────────────────────────────────────────────────────
+function faq(btn){
+  const item=btn.closest('.faq-item');
+  const ans=item.querySelector('.faq-a');
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>{el.classList.remove('open');el.querySelector('.faq-a').style.maxHeight='0';});
+  if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+}
+
+// ── Ticker ──────────────────────────────────────────────────────
+const TICKS=[
+  {s:'XAUUSD',p:'4,493.00',c:'+114.86',pct:'+2.62%',up:true},
+  {s:'XAGUSD',p:'74.21',c:'+1.40',pct:'+1.92%',up:true},
+  {s:'EURUSD',p:'1.0842',c:'+0.0031',pct:'+0.29%',up:true},
+  {s:'GBPUSD',p:'1.2634',c:'-0.0012',pct:'-0.09%',up:false},
+  {s:'USDJPY',p:'153.42',c:'+0.87',pct:'+0.57%',up:true},
+  {s:'USOIL',p:'78.54',c:'-0.63',pct:'-0.80%',up:false},
+  {s:'BTCUSD',p:'67,842',c:'+1,204',pct:'+1.81%',up:true},
+  {s:'USDCAD',p:'1.3621',c:'-0.0018',pct:'-0.13%',up:false},
+  {s:'AUDUSD',p:'0.6512',c:'+0.0024',pct:'+0.37%',up:true},
+  {s:'NZDUSD',p:'0.5987',c:'+0.0011',pct:'+0.18%',up:true},
+];
+(function(){
+  const t=document.getElementById('tk');
+  const make=arr=>arr.map(x=>`<div class="ticker-item"><span class="t-dot ${x.up?'t-up':'t-dn'}" style="background:${x.up?'var(--green)':'var(--red)'};border-radius:50%;width:5px;height:5px;display:inline-block"></span><span class="t-sym">${x.s}</span><span>${x.p}</span><span class="${x.up?'t-up':'t-dn'}">${x.c} (${x.pct})</span></div>`).join('');
+  t.innerHTML=make([...TICKS,...TICKS]);
+})();
+
+// ── Candle chart engine ─────────────────────────────────────────
+// ── Real 1H candlestick chart using Yahoo Finance via proxy ─────
+class CandleChart {
+  constructor(id, ticker, fallbackPrice) {
+    this.canvas = document.getElementById(id);
+    if (!this.canvas) return;
+    this.ctx     = this.canvas.getContext('2d');
+    this.ticker  = ticker;
+    this.candles = []; // { o, h, l, c, t }
+    this.liveC   = fallbackPrice; // current live close from API
+    this.BULL    = '#00D4AA';
+    this.BEAR    = '#FF4757';
+    this.maxShow = 32;
+    this.loaded  = false;
+    this.loadCandles();
+  }
+
+  async loadCandles() {
+    try {
+      // Yahoo Finance v8 chart API via allorigins CORS proxy
+      const url  = `https://query1.finance.yahoo.com/v8/finance/chart/${this.ticker}?interval=1h&range=5d`;
+      const proxy= `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const res  = await fetch(proxy);
+      const json = await res.json();
+      const data = JSON.parse(json.contents);
+      const result = data?.chart?.result?.[0];
+      if (!result) throw new Error('No data');
+      const ts   = result.timestamp;
+      const q    = result.indicators.quote[0];
+      this.candles = ts.map((t, i) => ({
+        t, o: q.open[i], h: q.high[i], l: q.low[i], c: q.close[i]
+      })).filter(c => c.o && c.h && c.l && c.c);
+      this.loaded = true;
+      this.draw();
+    } catch(e) {
+      console.warn('Yahoo fetch failed for', this.ticker, e.message);
+      // Graceful fallback: generate synthetic candles from live price
+      this._genFallback();
+    }
+  }
+
+  _genFallback() {
+    let p = this.liveC;
+    const vol = p * 0.003;
+    for (let i = 0; i < this.maxShow; i++) {
+      const o  = p;
+      const mv = (Math.random() - 0.48) * vol * 2;
+      const c  = o + mv;
+      const h  = Math.max(o, c) + Math.random() * vol * 0.6;
+      const l  = Math.min(o, c) - Math.random() * vol * 0.6;
+      this.candles.push({ o, h, l, c, t: Date.now() - (this.maxShow - i) * 3600000 });
+      p = c;
+    }
+    this.loaded = true;
+    this.draw();
+  }
+
+  updateLiveCandle(price) {
+    this.liveC = price;
+    if (!this.candles.length) return;
+    // Update the last candle's close and high/low in real time
+    const last = this.candles[this.candles.length - 1];
+    last.c = price;
+    if (price > last.h) last.h = price;
+    if (price < last.l) last.l = price;
+    this.draw();
+  }
+
+  draw() {
+    const { canvas: cv, ctx, candles } = this;
+    if (!candles.length) return;
+    const W = cv.offsetWidth || 400, H = cv.height;
+    cv.width = W;
+    ctx.clearRect(0, 0, W, H);
+    // Show last maxShow candles
+    const show = candles.slice(-this.maxShow);
+    const prices = show.flatMap(c => [c.h, c.l]).filter(Boolean);
+    if (!prices.length) return;
+    const mn = Math.min(...prices), mx = Math.max(...prices);
+    const rng = mx - mn || 1;
+    const pad = { t: 6, b: 6, l: 2, r: 2 };
+    const cw  = (W - pad.l - pad.r) / show.length;
+    const bw  = Math.max(2, cw * 0.6);
+    const toY = v => pad.t + (mx - v) / rng * (H - pad.t - pad.b);
+    show.forEach((cd, i) => {
+      if (!cd.o || !cd.c) return;
+      const x    = pad.l + i * cw + cw / 2;
+      const bull = cd.c >= cd.o;
+      const col  = bull ? this.BULL : this.BEAR;
+      // Wick
+      ctx.strokeStyle = col + 'AA'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, toY(cd.h)); ctx.lineTo(x, toY(cd.l)); ctx.stroke();
+      // Body
+      const y1 = toY(Math.max(cd.o, cd.c));
+      const y2 = toY(Math.min(cd.o, cd.c));
+      const bh = Math.max(1.5, y2 - y1);
+      ctx.fillStyle = bull ? this.BULL + 'CC' : this.BEAR + 'AA';
+      ctx.fillRect(x - bw / 2, y1, bw, bh);
+    });
+    // EMA line (8 period)
+    const ema8 = []; let k = 2 / 9;
+    show.forEach((cd, i) => {
+      if (!cd.c) return;
+      ema8.push(i === 0 ? cd.c : cd.c * k + (ema8[ema8.length-1] || cd.c) * (1 - k));
+    });
+    ctx.strokeStyle = 'rgba(249,115,22,.45)';
+    ctx.lineWidth = 1.5; ctx.setLineDash([]);
+    ctx.beginPath();
+    ema8.forEach((v, i) => {
+      const x = pad.l + i * cw + cw / 2;
+      i === 0 ? ctx.moveTo(x, toY(v)) : ctx.lineTo(x, toY(v));
+    });
+    ctx.stroke();
+  }
+}
+
+// Init charts — pass Yahoo Finance ticker symbol
+const xauChart = new CandleChart('cv-xau', 'XAUUSD%3DX', 4493.00);
+const xagChart = new CandleChart('cv-xag', 'XAGUSD%3DX', 74.21);
+
+// ── Real-time prices from gold-api.com ──────────────────────────
+const FOREX_OPEN_HOURS = {
+  // Gold/Silver trade 23h/day Mon–Fri (closed Sat, partial Sun)
+  isOpen() {
+    const now = new Date();
+    const day = now.getUTCDay(); // 0=Sun 6=Sat
+    const h   = now.getUTCHours();
+    const m   = now.getUTCMinutes();
+    const tod = h * 60 + m;
+    if (day === 6) return false;                    // Saturday closed
+    if (day === 0 && tod < 21 * 60) return false;   // Sunday before 21:00 UTC
+    if (day === 5 && tod >= 22 * 60) return false;  // Friday after 22:00 UTC
+    return true;
+  }
+};
+
+let xauOpen = 0, xagOpen = 0; // store opening price for change calculation
+
+function updateStatus(sym, isOpen) {
+  const el  = document.getElementById(sym + '-status');
+  const txt = document.getElementById(sym + '-status-txt');
+  if (!el || !txt) return;
+  el.className = 'mkt-status ' + (isOpen ? 'mkt-open' : 'mkt-closed');
+  txt.textContent = isOpen ? 'LIVE' : 'FERMÉ';
+}
+
+function applyPrice(sym, price, open) {
+  const priceEl = document.getElementById(sym + '-price');
+  const chgEl   = document.getElementById(sym + '-chg');
+  const hiEl    = document.getElementById(sym + '-h');
+  const loEl    = document.getElementById(sym + '-l');
+  const oEl     = document.getElementById(sym + '-o');
+  if (!priceEl) return;
+  const chg  = price - open;
+  const pct  = open > 0 ? (chg / open * 100) : 0;
+  const up   = chg >= 0;
+  const prev = parseFloat(priceEl.dataset.price || price);
+  const dir  = price >= prev ? 'up' : 'dn';
+  priceEl.textContent = price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  priceEl.dataset.price = price;
+  priceEl.className = 'cw-price ' + (up ? 'cw-up' : 'cw-dn');
+  priceEl.classList.add(dir === 'up' ? 'flash-g' : 'flash-r');
+  setTimeout(() => priceEl.classList.remove('flash-g', 'flash-r'), 700);
+  chgEl.textContent = (up ? '▲ +' : '▼ ') + Math.abs(chg).toFixed(2) + ' (' + (up ? '+' : '') + pct.toFixed(2) + '%)';
+  chgEl.className = 'cw-change ' + (up ? 'cw-up' : 'cw-dn');
+  if (oEl) oEl.textContent = open.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+async function fetchPrice(sym) {
+  try {
+    const res  = await fetch('https://api.gold-api.com/price/' + sym);
+    const data = await res.json();
+    return data;
+  } catch (e) { return null; }
+}
+
+async function refreshPrices() {
+  const isOpen = FOREX_OPEN_HOURS.isOpen();
+  updateStatus('xau', isOpen);
+  updateStatus('xag', isOpen);
+
+  const [xau, xag] = await Promise.all([fetchPrice('XAU'), fetchPrice('XAG')]);
+
+  if (xau && xau.price) {
+    if (!xauOpen) xauOpen = xau.prev_close_price || 4390.14;
+    applyPrice('xau', xau.price, xauOpen);
+    // Update live candle with real price
+    xauChart.updateLiveCandle(xau.price);
+  }
+  if (xag && xag.price) {
+    if (!xagOpen) xagOpen = xag.prev_close_price || 72.81;
+    applyPrice('xag', xag.price, xagOpen);
+    xagChart.updateLiveCandle(xag.price);
+  }
+}
+
+// Fetch immediately, then every 15s
+refreshPrices();
+setInterval(refreshPrices, 15000);
+
+// Reload real candles every 5 min when market open; update live candle each tick
+setInterval(() => {
+  if (!FOREX_OPEN_HOURS.isOpen()) return;
+  xauChart.loadCandles();
+  xagChart.loadCandles();
+}, 5 * 60 * 1000);
+
+// Resize handler
+window.addEventListener('resize', () => { xauChart.draw(); xagChart.draw(); });
+
+// ── Scroll Reveal ───────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv,.rv-l').forEach(el => obs.observe(el));
+
+// ── Stat counters ────────────────────────────────────────────────
+let counted = false;
+const statsObs = new IntersectionObserver(entries => {
+  if (counted || !entries[0].isIntersecting) return;
+  counted = true;
+  [[1,'s1',3,''],[2,'s2',6,''],[3,'s3',5,'+']].forEach(([,id,end,suf]) => {
+    let n = 0;
+    const el = document.getElementById(id);
+    const t = setInterval(() => { el.textContent = ++n + suf; if (n >= end) clearInterval(t); }, 180);
+  });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObs.observe(statsEl);
+
+// ── Phase numbers highlight ──────────────────────────────────────
+const phObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const n = e.target.querySelector('.phase-num');
+      if (n) { n.style.color = 'var(--fire)'; n.style.opacity = '1'; }
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.phase').forEach(el => phObs.observe(el));
+
+// ── Section tag entrance ─────────────────────────────────────────
+document.querySelectorAll('.sec-tag').forEach(el => el.classList.add('rv-l'));
+
+// ── i18n ────────────────────────────────────────────────────────
+let currentLang = 'fr';
+
+const translations = {
+            // ── PAGE TITLE ──
+            'page-title': {
+                fr: 'Formation Trading Forex, Commodités & Métaux - EmberTrading',
+                en: 'Forex, Commodities & Metals Trading Course - EmberTrading'
+            },
+            // ── HERO ──
+            'hero-badge': { fr: 'Formation complète Forex, Commodités & Métaux', en: 'Complete Forex, Commodities & Metals Course' },
+            'hero-h1': { fr: 'Du chaos <span class="text-fire">à la consistance</span>', en: 'From chaos <span class="text-fire">to consistency</span>' },
+            'hero-desc': { fr: 'Maîtrisez le trading sur tous les marchés avec une formation structurée, un mental en béton et un accompagnement direct.', en: 'Master trading across all markets with a structured course, an iron mindset and direct mentorship.' },
+            'hero-btn1': { fr: 'Commencer maintenant →', en: 'Start now →' },
+            'hero-btn2': { fr: 'Voir le programme', en: 'View the program' },
+            'hero-stat1': { fr: "Phases d'apprentissage", en: 'Learning phases' },
+            'hero-stat2': { fr: "Mois d'accompagnement", en: 'Months of mentorship' },
+            'hero-stat3': { fr: 'Ans de connaissance', en: 'Years of experience' },
+            // ── À PROPOS ──
+            'apropos-title': { fr: 'À propos', en: 'About' },
+            'apropos-subtitle': { fr: "Trader indépendant – Samuel D'amours", en: "Independent Trader – Samuel D'amours" },
+            'apropos-since': { fr: 'Passionné des marchés financiers depuis début 2019', en: 'Passionate about financial markets since early 2019' },
+            'apropos-profitable': { fr: 'Profitable de manière consistante depuis 3 ans', en: 'Consistently profitable for 3 years' },
+            'apropos-p1': { fr: "J'ai commencé à m'intéresser sérieusement au trading en 2019. Après plusieurs années d'apprentissage, d'erreurs et d'optimisations, je trade de façon rentable et disciplinée depuis 3 ans.", en: "I started taking trading seriously in 2019. After years of learning, mistakes and optimization, I have been trading profitably and with discipline for 3 years." },
+            'apropos-p2': { fr: "Fondateur d'EmberTrading, je partage mon approche axée sur <span style=\"color:#F97316;font-weight:600;\">la gestion du risque stricte, l'edge statistique et la constance sur le long terme.</span>", en: "Founder of EmberTrading, I share my approach focused on <span style=\"color:#F97316;font-weight:600;\">strict risk management, statistical edge and long-term consistency.</span>" },
+            'apropos-philo-label': { fr: '💡 Philosophie', en: '💡 Philosophy' },
+            'apropos-philo-text': { fr: '80% mental, 20% technique. La différence entre un trader rentable et un trader non rentable réside dans la psychologie et la discipline.', en: '80% mindset, 20% technique. The difference between a profitable and unprofitable trader lies in psychology and discipline.' },
+            // ── DIFFÉRENT ──
+            'diff-title': { fr: 'Ce qui rend cette formation différente', en: 'What makes this course different' },
+            'diff-1-title': { fr: 'Pas de technique à la mode', en: 'No trendy techniques' },
+            'diff-1-text': { fr: "Nous vous apportons les outils pour créer votre propre technique de trading. Nous n'essayons pas de vous vendre une technique à la mode.", en: "We give you the tools to build your own trading approach. We don't try to sell you a trendy technique." },
+            'diff-2-title': { fr: "L'importance de la psychologie", en: 'The importance of psychology' },
+            'diff-2-text': { fr: 'Nous mettons beaucoup l\'emphase sur la psychologie pour que vous développiez un bon risk management.', en: 'We place strong emphasis on psychology so you develop solid risk management.' },
+            'diff-3-title': { fr: 'Apprentissage par la pratique', en: 'Learning by doing' },
+            'diff-3-text': { fr: 'Défi démo concret avec journal obligatoire. Vous apprenez en agissant, pas en théorie.', en: 'Concrete demo challenge with mandatory journal. You learn by doing, not just theory.' },
+            'diff-4-title': { fr: 'Accompagnement personnalisé', en: 'Personalized mentorship' },
+            'diff-4-text': { fr: 'Feedback sans jugement sur vos trades réels et démo. Je reste présent pour répondre à vos questions.', en: 'Non-judgmental feedback on your real and demo trades. I stay available to answer your questions.' },
+            // ── PROGRAMME ──
+            'prog-title': { fr: 'Le programme en 3 phases', en: 'The 3-phase program' },
+            'phase1-label': { fr: 'Phase 1', en: 'Phase 1' },
+            'phase1-title': { fr: 'Les bases solides et survie', en: 'Strong foundations & survival' },
+            'phase1-duration': { fr: '2 à 6 semaines', en: '2 to 6 weeks' },
+            'phase1-item1': { fr: 'Lire un graphique (tendance, supports/résistances, bougies)', en: 'Reading a chart (trend, support/resistance, candles)' },
+            'phase1-item2': { fr: 'Maîtriser MetaTrader 5, ordres, levier, calcul de lot', en: 'Master MetaTrader 5, orders, leverage, lot sizing' },
+            'phase1-item3': { fr: 'Comprendre les sessions (Asia, Europe, US)', en: 'Understanding sessions (Asia, Europe, US)' },
+            'phase1-item4': { fr: "Identifier les heures d'ouverture optimales pour chaque paire/marché", en: 'Identify optimal trading hours for each pair/market' },
+            'phase1-item5': { fr: 'Comprendre accumulation/manipulation/<br>distribution', en: 'Understanding accumulation/manipulation/<br>distribution' },
+            'phase1-item6': { fr: "Astuce: repérer les zones d'accumulation", en: 'Tip: spotting accumulation zones' },
+            'phase1-item7': { fr: 'Défi démo clé: +1 000$ net sur 10k sans descendre sous 9k', en: 'Key demo challenge: +$1,000 net on 10k without dropping below 9k' },
+            'phase1-goal': { fr: "Objectif: Apprendre les bases du trading", en: 'Goal: Stop blowing your account, even after 10 losses' },
+            'phase2-label': { fr: 'Phase 2', en: 'Phase 2' },
+            'phase2-title': { fr: 'Forger le mental et discipline', en: 'Building mindset & discipline' },
+            'phase2-duration': { fr: 'Semaines 4 à 8', en: 'Weeks 4 to 8' },
+            'phase2-item1': { fr: 'Gestion du risque: 1-2% max par trade', en: 'Risk management: 1-2% max per trade' },
+            'phase2-item2': { fr: 'Contrôler les émotions: pas de revenge, pause après 3 pertes', en: 'Control emotions: no revenge trading, break after 3 losses' },
+            'phase2-item3': { fr: 'Analyse top-down: H4 → timeframes inférieurs', en: 'Top-down analysis: H4 → lower timeframes' },
+            'phase2-item4': { fr: 'Zones de liquidité, anciens swing highs/lows', en: 'Liquidity zones, previous swing highs/lows' },
+            'phase2-item5': { fr: 'Trader pendant les sessions optimales', en: 'Trade during optimal sessions' },
+            'phase2-item6': { fr: 'Style recommandé: petits mouvements fréquents', en: 'Recommended style: frequent small moves' },
+            'phase2-goal': { fr: 'Objectif: Trader un processus, pas vos émotions', en: 'Goal: Trade a process, not your emotions' },
+            'phase3-label': { fr: 'Phase 3', en: 'Phase 3' },
+            'phase3-title': { fr: 'Passage réel et scaling', en: 'Going live & scaling' },
+            'phase3-duration': { fr: 'Après 6-12 semaines', en: 'After 6-12 weeks' },
+            'phase3-item1': { fr: 'Passage à la réalité: Prop firm ou compte live', en: 'Going live: Prop firm or live account' },
+            'phase3-item2': { fr: 'Journal de trading continu et feedback personnalisé', en: 'Ongoing trading journal and personalized feedback' },
+            'phase3-item3': { fr: 'Soutien 6 mois: questions illimitées, revue de charts', en: '6-month support: unlimited questions, chart reviews' },
+            'phase3-item4': { fr: 'Optimisation des sessions: vos meilleures heures', en: 'Session optimization: your best trading hours' },
+            'phase3-item5': { fr: 'Accompagnement psychologique et conseils de scaling', en: 'Psychological support and scaling advice' },
+            'phase3-item6': { fr: 'Mon edge personnel: ma technique de trading', en: 'My personal edge: my trading technique' },
+            'phase3-item7': { fr: "Mon indicateur personnel codé que j'utilise", en: 'My personal coded indicator that I use' },
+            'phase3-goal': { fr: 'Objectif: Prouver que vous tenez en conditions réelles', en: 'Goal: Prove you hold up in real conditions' },
+            // ── PRICING ──
+            'pricing-title': { fr: 'Deux chemins vers la rentabilité', en: 'Two paths to profitability' },
+            'pricing-subtitle': { fr: 'Les deux plans incluent une formation solide. La différence? Le coaching personnel et les outils secrets.', en: 'Both plans include a solid course. The difference? Personal coaching and secret tools.' },
+            'pricing-note': { fr: '<span class="font-bold" style="color:#F97316;">Les deux offres couvrent les 3 phases du programme.</span> La Compacte est compacte avec l\'essentiel, la Complète ajoute coaching personnalisé + mes outils secrets.', en: '<span class="font-bold" style="color:#F97316;">Both offers cover the 3 program phases.</span> The Compact has the essentials, the Complete adds personal coaching + my secret tools.' },
+            'compact-title': { fr: 'Formation Compacte', en: 'Compact Course' },
+            'compact-desc': { fr: 'Formation compacte et essentielle pour débuter', en: 'Compact and essential course to get started' },
+            'compact-payment': { fr: 'Paiement unique - Accès illimité', en: 'One-time payment - Unlimited access' },
+            'compact-what': { fr: '✓ Ce que vous recevez:', en: '✓ What you receive:' },
+            'compact-item1': { fr: 'Les 3 phases du programme (version compacte)', en: 'The 3 program phases (compact version)' },
+            'compact-item2': { fr: 'Fondamentaux multi-marchés: graphiques, supports/résistances, bougies', en: 'Multi-market fundamentals: charts, support/resistance, candles' },
+            'compact-item3': { fr: 'Maîtrise MetaTrader 5, ordres, levier, gestion du risque', en: 'MetaTrader 5 mastery, orders, leverage, risk management' },
+            'compact-item4': { fr: "Défis démo + journal d'apprentissage structuré", en: 'Demo challenges + structured learning journal' },
+            'compact-item5': { fr: 'Mental et discipline: gérer les émotions, patience, stop loss', en: 'Mindset and discipline: managing emotions, patience, stop loss' },
+            'compact-item6': { fr: 'Support direct - je reste présent pour répondre à vos questions', en: 'Direct support - I stay available to answer your questions' },
+            'compact-diff-title': { fr: 'Différences vs Formation Complète:', en: 'Differences vs Complete Course:' },
+            'compact-diff1': { fr: 'Pas de coaching personnalisé approfondi', en: 'No in-depth personal coaching' },
+            'compact-diff2': { fr: 'Pas accès à ma technique de trading personnelle', en: 'No access to my personal trading technique' },
+            'compact-diff3': { fr: "Pas accès à mon indicateur propriétaire", en: 'No access to my proprietary indicator' },
+            'compact-diff4': { fr: "Moins de contenu et d'outils avancés", en: 'Less content and advanced tools' },
+            'compact-btn1': { fr: 'En savoir plus →', en: 'Learn more →' },
+            'compact-btn2': { fr: 'Acheter maintenant - 500$ →', en: 'Buy now - $500 →' },
+            'complete-desc': { fr: 'Contenu approfondi, coaching personnel et tous mes outils', en: 'In-depth content, personal coaching and all my tools' },
+            'complete-payment': { fr: 'Paiement unique - Accès illimité + Coaching 6 mois', en: 'One-time payment - Unlimited access + 6-month coaching' },
+            'complete-what': { fr: '✓ Ce que vous recevez:', en: '✓ What you receive:' },
+            'complete-item1': { fr: 'Les 3 phases complètes avec beaucoup plus de contenu', en: 'All 3 complete phases with much more content' },
+            'complete-item2': { fr: 'Formation adaptée au total débutant ET aux traders avancés', en: 'Course adapted for complete beginners AND advanced traders' },
+            'complete-item3': { fr: 'Maîtrise avancée: graphiques, patterns, zones de liquidité', en: 'Advanced mastery: charts, patterns, liquidity zones' },
+            'complete-item4': { fr: 'Gestion mentale et psychologique du trading (approfondie)', en: 'In-depth mental and psychological trading management' },
+            'complete-item5': { fr: '🔐 Mon edge personnel (technique et gestion psychologique)', en: '🔐 My personal edge (technique and psychological management)' },
+            'complete-item6': { fr: "🤖 Mon indicateur propriétaire que j'utilise", en: '🤖 My proprietary indicator that I use' },
+            'complete-item7': { fr: 'Coaching personnalisé 6 mois', en: 'Personalized 6-month coaching' },
+            'complete-item8': { fr: 'Revue complète de vos trades réels', en: 'Full review of your real trades' },
+            'complete-item9': { fr: 'Accès direct avec questions illimitées', en: 'Direct access with unlimited questions' },
+            'complete-item10': { fr: 'Support psychologique et conseils de scaling', en: 'Psychological support and scaling advice' },
+            'complete-item11': { fr: '📢 Groupe VIP Telegram — positions daily envoyées en direct', en: '📢 VIP Telegram group — daily positions sent live' },
+            'complete-indicator-label': { fr: "🤖 L'indicateur propriétaire est inclus dans le prix", en: '🤖 The proprietary indicator is included in the price' },
+            'complete-indicator-text': { fr: 'Formation complète sur son utilisation quotidienne', en: 'Complete training on its daily use' },
+            'complete-btn': { fr: 'Acheter maintenant - 1000$ →', en: 'Buy now - $1000 →' },
+            'compare-title': { fr: 'Résumé: Quelle offre pour vous?', en: 'Summary: Which offer is for you?' },
+            'compare-compact-title': { fr: 'Formation Compacte - 500$', en: 'Compact Course - $500' },
+            'compare-compact1': { fr: 'Vous êtes débutant et voulez apprendre les bases solides', en: "You're a beginner and want to learn solid foundations" },
+            'compare-compact2': { fr: 'Vous pouvez être autonome et vous engager sérieusement', en: 'You can be independent and commit seriously' },
+            'compare-compact3': { fr: 'Vous voulez une formation compacte et essentielle', en: 'You want a compact and essential course' },
+            'compare-compact4': { fr: 'Vous avez un budget restreint', en: 'You have a limited budget' },
+            'compare-complete-title': { fr: 'Formation Complète - 1000$', en: 'Complete Course - $1000' },
+            'compare-complete1': { fr: 'Vous voulez les résultats les plus rapides possibles', en: 'You want the fastest possible results' },
+            'compare-complete2': { fr: 'Vous voulez du feedback personnel et coaching direct', en: 'You want personal feedback and direct coaching' },
+            'compare-complete3': { fr: 'Vous voulez accès à mes outils (edge et indicateur)', en: 'You want access to my tools (edge and indicator)' },
+            'compare-complete4': { fr: 'Vous voulez une véritable relation de mentorat 6 mois', en: 'You want a real 6-month mentorship relationship' },
+            'compare-complete5': { fr: 'Vous êtes prêt à investir pour transformer votre vie', en: 'You are ready to invest to transform your life' },
+            'compare-complete6': { fr: '✓ Vous voulez accès au groupe VIP Telegram (positions daily)', en: '✓ You want access to the VIP Telegram group (daily positions)' },
+            // ── INDICATEURS ──
+            'ind-title': { fr: 'Mes Indicateurs de Trading', en: 'My Trading Indicators' },
+            'ind-subtitle': { fr: "Des outils développés et optimisés à partir de mon expérience réelle sur les marchés", en: 'Tools developed and optimized from my real market experience' },
+            'ind1-desc': { fr: "Identifie automatiquement les zones de <span style=\"color:#4ade80;font-weight:600;\">support (vert)</span> et <span style=\"color:#f87171;font-weight:600;\">résistance (rouge)</span> à partir du plus haut et du plus bas d'une période.", en: "Automatically identifies <span style=\"color:#4ade80;font-weight:600;\">support (green)</span> and <span style=\"color:#f87171;font-weight:600;\">resistance (red)</span> zones from a period's high and low." },
+            'ind1-item1': { fr: '<span class="font-semibold text-white">Buy/Sell Power</span> – dominance acheteurs/vendeurs en temps réel', en: '<span class="font-semibold text-white">Buy/Sell Power</span> – buyer/seller dominance in real time' },
+            'ind1-item2': { fr: '<span class="font-semibold text-white">Signaux de breakout</span> – détection automatique lors des cassures', en: '<span class="font-semibold text-white">Breakout signals</span> – automatic detection on breakouts' },
+            'ind1-item3': { fr: '<span class="font-semibold text-white">Fair Value Gaps (FVG)</span> – détection sur 5 min et 15 min', en: '<span class="font-semibold text-white">Fair Value Gaps (FVG)</span> – detection on 5 min and 15 min' },
+            'ind1-price-label': { fr: 'Prix unique', en: 'One-time price' },
+            'ind1-access': { fr: 'Accès illimité', en: 'Unlimited access' },
+            'ind1-btn': { fr: 'Acheter – 300$ →', en: 'Buy – $300 →' },
+            'ind2-desc': { fr: "Trace automatiquement des trendlines à partir des pivots du marché. Des zones <span style=\"color:#4ade80;font-weight:600;\">vertes (hausse)</span> et <span style=\"color:#f87171;font-weight:600;\">rouges (baisse)</span> s'ajustent à la volatilité.", en: "Automatically draws trendlines from market pivots. <span style=\"color:#4ade80;font-weight:600;\">Green zones (uptrend)</span> and <span style=\"color:#f87171;font-weight:600;\">red zones (downtrend)</span> adjust to volatility." },
+            'ind2-item1': { fr: '<span class="font-semibold text-white">Cassures détectées</span> – signaux BREAK BULLISH / BEARISH automatiques', en: '<span class="font-semibold text-white">Breakouts detected</span> – automatic BREAK BULLISH / BEARISH signals' },
+            'ind2-item2': { fr: '<span class="font-semibold text-white">Rebonds identifiés</span> – signaux BUY/SELL sur les lignes de tendance', en: '<span class="font-semibold text-white">Bounces identified</span> – BUY/SELL signals on trendlines' },
+            'ind2-item3': { fr: '<span class="font-semibold text-white">Target & Stop Loss</span> – calculés automatiquement lors d\'un BREAK', en: '<span class="font-semibold text-white">Target & Stop Loss</span> – automatically calculated on a BREAK' },
+            'ind2-item4': { fr: '<span class="font-semibold text-white">Swing highs/lows</span> – affichage 5 min, graphique clair', en: '<span class="font-semibold text-white">Swing highs/lows</span> – 5 min display, clean chart' },
+            'ind2-btn': { fr: 'Acheter – 300$ →', en: 'Buy – $300 →' },
+            'recommended': { fr: '⭐ RECOMMANDÉ', en: '⭐ RECOMMENDED' },
+            'combo-save': { fr: '🔥 ÉCONOMISEZ 100$', en: '🔥 SAVE $100' },
+            'combo-title': { fr: 'Combo Indicateur', en: 'Indicator Combo' },
+            'combo-desc': { fr: "Obtenez les deux indicateurs ensemble et économisez 100$. Le duo parfait pour maximiser votre avantage sur les marchés.", en: 'Get both indicators together and save $100. The perfect duo to maximize your market edge.' },
+            'combo-item1': { fr: 'Support & Resistance Power Zones', en: 'Support & Resistance Power Zones' },
+            'combo-item2': { fr: 'Trendline Fusion', en: 'Trendline Fusion' },
+            'combo-item3': { fr: 'Accès illimité aux deux outils', en: 'Unlimited access to both tools' },
+            'combo-old-price': { fr: '600$ séparément', en: '$600 separately' },
+            'combo-payment': { fr: 'Paiement unique - Les deux indicateurs', en: 'One-time payment - Both indicators' },
+            'combo-btn': { fr: 'Acheter le Combo – 500$ →', en: 'Buy the Combo – $500 →' },
+            'ind-note': { fr: 'Les deux indicateurs sont aussi <span class="font-semibold" style="color:#F97316;">inclus gratuitement</span> avec la Formation Complète à 1000$', en: 'Both indicators are also <span class="font-semibold" style="color:#F97316;">included for free</span> with the Complete Course at $1000' },
+            // ── OUTILS ──
+            'tools-title': { fr: "Les outils que j'utilise", en: 'The tools I use' },
+            'tools-subtitle': { fr: 'Les outils et stratégies qui me permettent d\'être rentable et consistant', en: 'The tools and strategies that allow me to be profitable and consistent' },
+            'tools-edge-title': { fr: 'Mon Edge Personnel', en: 'My Personal Edge' },
+            'tools-edge-text': { fr: "Ma technique de trading combinant l'analyse technique avancée et la gestion psychologique du risque. Vous apprendrez exactement ma façon de placer mes positions et comment je gère mon capital avec discipline.", en: "My trading technique combining advanced technical analysis and psychological risk management. You will learn exactly how I place my positions and manage my capital with discipline." },
+            'tools-edge-label': { fr: '✓ Inclus à la Formation Complète', en: '✓ Included in the Complete Course' },
+            'tools-edge-sublabel': { fr: 'La fondation de ma rentabilité', en: 'The foundation of my profitability' },
+            'tools-ind-title': { fr: 'Mon Indicateur Propriétaire', en: 'My Proprietary Indicator' },
+            'tools-ind-text': { fr: "Un outil que j'ai développé et optimisé au fil des années de trading réel. Cet indicateur vous donne un avantage supplémentaire pour identifier les opportunités de trading avec plus de précision.", en: "A tool I developed and optimized over years of real trading. This indicator gives you an extra edge to identify trading opportunities with greater precision." },
+            'tools-ind-label': { fr: '✓ Inclus à la Formation Complète', en: '✓ Included in the Complete Course' },
+            'tools-ind-sublabel': { fr: 'Formation complète sur son utilisation quotidienne', en: 'Complete training on its daily use' },
+            'tools-cta': { fr: 'Ces deux outils combinés = <span style="color:#F97316;">ta méthode personnalisée pour être profitable et consistant</span>', en: 'These two tools combined = <span style="color:#F97316;">your personalized method to be profitable and consistent</span>' },
+            // ── FAQ ──
+            'faq-title': { fr: 'Questions Fréquentes', en: 'Frequently Asked Questions' },
+            'faq1-q': { fr: 'Quel est le capital minimum pour commencer?', en: 'What is the minimum capital to start?' },
+            'faq1-a': { fr: "Pour la Phase Démo, zéro capital requis - vous pratiquez sur un compte de démonstration. Pour passer à la Phase 3 (réel), je recommande un minimum de 500-1000$ pour une gestion prudente du risque.", en: "For the Demo Phase, zero capital required - you practice on a demo account. To move to Phase 3 (real), I recommend a minimum of $500-1000 for careful risk management." },
+            'faq2-q': { fr: 'Combien de temps avant de devenir rentable?', en: 'How long before becoming profitable?' },
+            'faq2-a': { fr: "Cela dépend de votre engagement. Avec la formation complète et la discipline, la plupart des traders voient des résultats positifs en 2-4 mois en démo. Le passage au réel nécessite généralement 3-6 mois supplémentaires.", en: "It depends on your commitment. With the complete course and discipline, most traders see positive results in 2-4 months on demo. Going live generally requires an additional 3-6 months." },
+            'faq3-q': { fr: 'La formation couvre-t-elle plusieurs marchés ou juste le Forex?', en: 'Does the course cover multiple markets or just Forex?' },
+            'faq3-a': { fr: "La formation couvre tous les marchés: Forex, Or (XAUUSD), Commodités (pétrole, gaz naturel, etc.) et Métaux précieux. Les principes sont identiques pour tous.", en: "The course covers all markets: Forex, Gold (XAUUSD), Commodities (oil, natural gas, etc.) and Precious Metals. The principles are the same for all." },
+            'faq4-q': { fr: 'Quelle est la différence entre Formation Compacte et Formation Complète?', en: 'What is the difference between Compact and Complete Course?' },
+            'faq4-a': { fr: "La Formation Compacte vous enseigne les fondamentaux solides des 3 phases. La Formation Complète ajoute: un coaching personnalisé intensif pendant 6 mois, l'accès à mon edge personnel et mon indicateur propriétaire.", en: "The Compact Course teaches you the solid fundamentals of the 3 phases. The Complete Course adds: intensive personalized coaching for 6 months, access to my personal edge and proprietary indicator." },
+            'faq5-q': { fr: 'Avez-vous des garanties de profit ou de remboursement?', en: 'Do you have profit or refund guarantees?' },
+            'faq5-a': { fr: "Non. Le trading comporte des risques et aucune formation ne peut garantir des profits. Ce que je garantis: une formation solide basée sur mes 3+ ans de rentabilité, un accompagnement sérieux et de vraies stratégies.", en: "No. Trading involves risks and no course can guarantee profits. What I guarantee: a solid course based on my 3+ years of profitability, serious mentorship and real strategies." },
+            'faq6-q': { fr: 'Quel broker/plateforme recommandez-vous?', en: 'Which broker/platform do you recommend?' },
+            'faq6-a': { fr: "Je recommande MetaTrader 5 (MT5) comme plateforme car c'est ce que j'utilise. Pour les brokers, je conseille ceux régulés et fiables.", en: "I recommend MetaTrader 5 (MT5) as the platform since that is what I use. For brokers, I recommend regulated and reliable ones." },
+            'faq7-q': { fr: 'Dois-je avoir des connaissances préalables en trading?', en: 'Do I need prior trading knowledge?' },
+            'faq7-a': { fr: "Non! La formation est conçue pour les débutants complets ET les traders avec expérience. Chacun progresse à son rythme.", en: "No! The course is designed for complete beginners AND experienced traders. Everyone progresses at their own pace." },
+            'faq8-q': { fr: 'Combien de temps par jour dois-je consacrer au trading?', en: 'How much time per day should I dedicate to trading?' },
+            'faq8-a': { fr: "Avec ma méthode, vous pouvez trader 30min-2h par jour pendant vos sessions préférées. La discipline et la qualité des trades comptent plus que le temps passé.", en: "With my method, you can trade 30min-2h per day during your preferred sessions. Discipline and trade quality matter more than time spent." },
+            'faq9-q': { fr: "L'accompagnement 6 mois signifie quoi exactement?", en: 'What exactly does the 6-month support mean?' },
+            'faq9-a': { fr: "Pour la Formation Complète: 6 mois d'accès direct à moi pour questions illimitées, revue de vos charts et trades réels, feedback personnalisé, conseil psychologique et stratégies de scaling.", en: "For the Complete Course: 6 months of direct access to me for unlimited questions, review of your charts and real trades, personalized feedback, psychological advice and scaling strategies." },
+            'faq-cta': { fr: "D'autres questions?", en: 'More questions?' },
+            'nav-vip': { fr: 'VIP', en: 'VIP' },
+            'vip-title': { fr: 'Groupe VIP Telegram', en: 'VIP Telegram Group' },
+            'vip-subtitle': { fr: 'Recevez mes positions daily en direct sur Telegram.', en: 'Receive my daily positions live on Telegram.' },
+            'vip-desc': { fr: 'Pour avoir accès au groupe VIP et recevoir mes positions daily, rejoignez d\'abord le groupe Telegram gratuit puis contactez-moi directement en mentionnant <strong style="color:#F97316;font-weight:700;">« VIP »</strong>.', en: 'To access the VIP group and receive my daily positions, first join the free Telegram group then contact me directly mentioning <strong style="color:#F97316;font-weight:700;">"VIP"</strong>.' },
+            'vip-btn': { fr: 'Rejoindre le groupe Telegram →', en: 'Join the Telegram group →' },
+            'vip-note': { fr: '💡 Inclus gratuitement avec la Formation Complète à 1000$', en: '💡 Included for free with the Complete Course at $1000' },
+            'vip-mgmt-title': { fr: 'Management de compte MT5 — VIP exclusif', en: 'MT5 Account Management — VIP exclusive' },
+            'vip-mgmt-desc': { fr: 'Je gère votre compte MT5 directement pour les membres VIP. Contactez-moi sur Telegram pour plus d\'informations.', en: 'I manage your MT5 account directly for VIP members. Contact me on Telegram for more information.' },
+            'faq-cta-link': { fr: 'Contactez-moi directement →', en: 'Contact me directly →' },
+            // ── ACCÈS DOCUMENTS ──
+            'docs-title': { fr: 'Comment accéder à votre formation?', en: 'How to access your course?' },
+            'docs-step1-title': { fr: 'Étape 1: Effectuez le paiement', en: 'Step 1: Make the payment' },
+            'docs-step1-text': { fr: 'Cliquez sur "Acheter maintenant" et complétez le paiement sécurisé via Stripe.', en: 'Click "Buy now" and complete the secure payment via Stripe.' },
+            'docs-step2-title': { fr: 'Étape 2: Recevez les documents', en: 'Step 2: Receive the documents' },
+            'docs-step2-text': { fr: 'Après le paiement, les documents Word de votre formation sont envoyés à votre email automatiquement.', en: 'After payment, the Word documents for your course are sent to your email automatically.' },
+            'docs-step3-title': { fr: 'Étape 3: Accédez au cloud', en: 'Step 3: Access the cloud' },
+            'docs-step3-text': { fr: 'Les documents sont sur un cloud gratuit. Aucun besoin de payer ou télécharger Word.', en: 'Documents are on a free cloud. No need to pay for or download Word.' },
+            'docs-about-title': { fr: '📋 À propos de vos documents', en: '📋 About your documents' },
+            'docs-item1': { fr: '<span class="font-semibold">Format Word:</span> Les documents sont en format .docx (lisible partout)', en: '<span class="font-semibold">Word format:</span> Documents are in .docx format (readable everywhere)' },
+            'docs-item2': { fr: '<span class="font-semibold">Pas besoin de payer:</span> Accès gratuit au cloud - aucun abonnement Word payant requis', en: '<span class="font-semibold">No need to pay:</span> Free cloud access - no paid Word subscription required' },
+            'docs-item3': { fr: '<span class="font-semibold">Accès en ligne:</span> Consultez depuis n\'importe quel appareil', en: '<span class="font-semibold">Online access:</span> View from any device' },
+            'docs-item4': { fr: '<span class="font-semibold">Accès illimité:</span> Une fois payé, vous avez accès à vie aux documents', en: '<span class="font-semibold">Unlimited access:</span> Once paid, you have lifetime access to the documents' },
+            'docs-item5': { fr: '<span class="font-semibold">Téléchargement optionnel:</span> Vous pouvez télécharger et sauvegarder si vous le souhaitez', en: '<span class="font-semibold">Optional download:</span> You can download and save if you wish' },
+            // ── CONTACT ──
+            'contact-title': { fr: 'Prêt à commencer?', en: 'Ready to start?' },
+            'contact-subtitle': { fr: 'Contactez-moi directement pour démarrer votre formation.', en: 'Contact me directly to start your course.' },
+            'contact-tg-free': { fr: 'Groupe Telegram Gratuit', en: 'Free Telegram Group' },
+            'contact-tg-free-desc': { fr: 'Rejoignez pour des prédictions et analyses chaque semaine', en: 'Join for weekly predictions and market analysis' },
+            'contact-tg-free-link': { fr: 'Totalement gratuit - Cliquez pour rejoindre →', en: 'Completely free - Click to join →' },
+            'contact-email-label': { fr: 'Email direct', en: 'Direct email' },
+            'contact-tg-label': { fr: 'Telegram (plus rapide)', en: 'Telegram (faster)' },
+            'contact-btn1': { fr: 'Rejoindre Telegram →', en: 'Join Telegram →' },
+            'contact-btn2': { fr: 'Envoyer un email →', en: 'Send an email →' },
+            'contact-btn3': { fr: 'Ouvrir Telegram →', en: 'Open Telegram →' },
+            'contact-mention': { fr: 'Mentionne "Formation Trading" pour une réponse plus rapide', en: 'Mention "Trading Course" for a faster response' },
+            // ── FOOTER ──
+            'footer-tagline': { fr: 'Si vous êtes patient, discipliné et prêt à travailler votre mental...', en: 'If you are patient, disciplined and ready to work on your mindset...' },
+            'footer-cta': { fr: 'Cette formation vous met sur les rails pour devenir rentable et consistant.', en: 'This course puts you on track to become profitable and consistent.' },
+            'footer-copy': { fr: "© Samuel D'amours/EmberTrading, 2026. Tous droits réservés.", en: "© Samuel D'amours/EmberTrading, 2026. All rights reserved." },
+            'footer-disclaimer-title': { fr: 'Clause de non-responsabilité :', en: 'Disclaimer:' },
+            'footer-disclaimer': { fr: "Les analyses partagées le sont à titre informatif et éducatif uniquement. Elles ne constituent ni une recommandation d'achat ou de vente, ni un conseil en investissement.", en: "The analyses shared are for informational and educational purposes only. They do not constitute a buy or sell recommendation, nor investment advice." },
+            'footer-risk': { fr: "Risque élevé : Le trading sur le Forex comporte des risques importants et peut entraîner la perte totale du capital investi.", en: "High risk: Forex trading involves significant risks and may result in the total loss of invested capital." },
+        };
+
+
+        function toggleLang() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const btn = document.getElementById('lang-btn');
+            btn.textContent = currentLang === 'fr' ? '🌐 EN' : '🌐 FR';
+            document.documentElement.lang = currentLang;
+            document.title = translations['page-title'][currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key]) el.innerHTML = translations[key][currentLang];
+            });
+            document.querySelectorAll('[data-fr]').forEach(el => {
+                el.textContent = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-en');
+            });
+        }
+
+</script>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  EMBER & SMOKE BACKGROUND ENGINE
+// ════════════════════════════════════════════════════════════════
+
+// ── Smoke wisps ──────────────────────────────────────────────────
+(function buildSmoke() {
+  const wrap = document.getElementById('smoke-wrap');
+  const configs = [
+    { left:'8%',  w:220, h:280, dur:'16s', delay:'0s',   drift:'15px',  drift2:'35px'  },
+    { left:'22%', w:180, h:240, dur:'20s', delay:'3s',   drift:'-20px', drift2:'-45px' },
+    { left:'38%', w:260, h:320, dur:'18s', delay:'6s',   drift:'25px',  drift2:'50px'  },
+    { left:'52%', w:200, h:260, dur:'22s', delay:'1.5s', drift:'-15px', drift2:'-30px' },
+    { left:'67%', w:240, h:300, dur:'15s', delay:'8s',   drift:'20px',  drift2:'40px'  },
+    { left:'80%', w:170, h:220, dur:'19s', delay:'4s',   drift:'-25px', drift2:'-50px' },
+    { left:'92%', w:190, h:250, dur:'17s', delay:'10s',  drift:'10px',  drift2:'25px'  },
+  ];
+  configs.forEach(cfg => {
+    const div = document.createElement('div');
+    div.className = 'smoke';
+    div.style.cssText = [
+      'left:' + cfg.left,
+      'width:' + cfg.w + 'px',
+      'height:' + cfg.h + 'px',
+      '--dur:' + cfg.dur,
+      '--delay:' + cfg.delay,
+      '--drift:' + cfg.drift,
+      '--drift2:' + cfg.drift2,
+    ].join(';');
+    wrap.appendChild(div);
+  });
+})();
+
+// ── Ember particle engine on Canvas ──────────────────────────────
+(function() {
+  const canvas = document.getElementById('embers-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particle class
+  class Ember {
+    constructor() { this.reset(true); }
+    reset(init = false) {
+      // Start from bottom with some spread
+      this.x = Math.random() * W;
+      this.y = init ? Math.random() * H : H + 10;
+      // Speed — mostly upward, slight drift
+      this.vx = (Math.random() - 0.5) * 0.6;
+      this.vy = -(Math.random() * 1.4 + 0.4);
+      // Size — small glowing dot
+      this.r  = Math.random() * 2 + 0.5;
+      // Life cycle
+      this.life    = 0;
+      this.maxLife = Math.random() * 280 + 120;
+      // Color — red → orange → amber → white-hot
+      this.hue = Math.random() * 30 + 10; // 10–40 deg
+      this.sat = 90 + Math.random() * 10;
+      // Flicker phase
+      this.flickerOffset = Math.random() * Math.PI * 2;
+      this.flickerSpeed  = Math.random() * 0.12 + 0.04;
+      // Drift wobble
+      this.wobble      = 0;
+      this.wobbleSpeed = (Math.random() - 0.5) * 0.03;
+    }
+    update() {
+      this.life++;
+      this.wobble += this.wobbleSpeed;
+      this.x += this.vx + Math.sin(this.wobble) * 0.4;
+      this.y += this.vy;
+      // Slight slow-down and drift as it rises
+      this.vy *= 0.998;
+      // Heat shimmer — occasional burst
+      if (Math.random() < 0.002) { this.vx += (Math.random() - 0.5) * 1.5; }
+      if (this.life > this.maxLife || this.y < -20) this.reset();
+    }
+    draw(ctx) {
+      const t = this.life / this.maxLife;
+      // Flicker brightness
+      const flicker = 0.7 + Math.sin(this.life * this.flickerSpeed + this.flickerOffset) * 0.3;
+      // Alpha: fade in at birth, fade out near end
+      const alpha = flicker * (t < 0.1 ? t * 10 : t > 0.7 ? (1 - t) / 0.3 : 1) * 0.85;
+      // Color shifts from orange-red → amber as it rises and cools
+      const lum = 50 + t * 30; // gets brighter/lighter as it rises
+      const col = `hsla(${this.hue},${this.sat}%,${lum}%,${alpha})`;
+
+      ctx.save();
+      // Outer glow
+      const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 4);
+      grd.addColorStop(0, col);
+      grd.addColorStop(0.4, `hsla(${this.hue},${this.sat}%,${lum}%,${alpha * 0.4})`);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+      // Core bright dot
+      ctx.fillStyle = `hsla(${this.hue + 20},100%,${Math.min(90, lum + 20)}%,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Sleeping embers on the floor — dimmer, barely moving
+  class SleepingEmber {
+    constructor() { this.reset(); }
+    reset() {
+      this.x    = Math.random() * W;
+      this.y    = H - Math.random() * 60;
+      this.r    = Math.random() * 3 + 1;
+      this.hue  = Math.random() * 20 + 5;
+      this.phase= Math.random() * Math.PI * 2;
+      this.speed= Math.random() * 0.015 + 0.005;
+      this.baseAlpha = Math.random() * 0.5 + 0.15;
+    }
+    update() { this.phase += this.speed; }
+    draw(ctx) {
+      const a = this.baseAlpha * (0.5 + Math.sin(this.phase) * 0.5);
+      const lum = 35 + Math.sin(this.phase) * 15;
+      const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 5);
+      grd.addColorStop(0, `hsla(${this.hue},95%,${lum}%,${a})`);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+      // Core
+      ctx.fillStyle = `hsla(${this.hue + 10},100%,${Math.min(80, lum + 25)}%,${a * 1.2})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Create particles
+  const EMBER_COUNT   = 80;
+  const SLEEPING_COUNT = 55;
+  const embers   = Array.from({ length: EMBER_COUNT   }, () => new Ember());
+  const sleeping  = Array.from({ length: SLEEPING_COUNT }, () => new SleepingEmber());
+
+  // Animate
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    // Draw sleeping embers first (floor level)
+    sleeping.forEach(e => { e.update(); e.draw(ctx); });
+    // Draw rising embers
+    embers.forEach(e => { e.update(); e.draw(ctx); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // On window resize, reset sleeping embers positions
+  window.addEventListener('resize', () => {
+    sleeping.forEach(e => e.reset());
+  });
+})();
+</script>
+
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  HERO BACKGROUND — Animated ember candlestick chart
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('hero-candles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  * window.devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
+  window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); drawAll(); });
+  resize();
+
+  // ── Candle data ────────────────────────────────────────────────
+  const COLS    = 52;   // number of candle columns
+  let price     = 4493;
+  let candles   = [];
+
+  function genCandle() {
+    const o   = price;
+    const move= (Math.random() - 0.47) * 3.5;
+    const c   = o + move;
+    const hi  = Math.max(o, c) + Math.random() * 1.5;
+    const lo  = Math.min(o, c) - Math.random() * 1.5;
+    price     = c;
+    return { o, c, h: hi, l: lo, age: 0 };
+  }
+
+  // Init candles
+  for (let i = 0; i < COLS; i++) candles.push(genCandle());
+
+  // ── Colors — ember palette ─────────────────────────────────────
+  // Bull candle: deep amber → orange
+  // Bear candle: deep crimson → dark red
+  // Wicks: slightly lighter
+
+  function getBullGrad(ctx, x, y1, y2) {
+    const grd = ctx.createLinearGradient(x, y1, x, y2);
+    grd.addColorStop(0, 'rgba(251,191,36,.85)');   // amber top
+    grd.addColorStop(0.5,'rgba(234,88,12,.9)');     // fire orange mid
+    grd.addColorStop(1, 'rgba(194,65,12,.85)');     // deep ember bottom
+    return grd;
+  }
+
+  function getBearGrad(ctx, x, y1, y2) {
+    const grd = ctx.createLinearGradient(x, y1, x, y2);
+    grd.addColorStop(0, 'rgba(120,20,10,.7)');      // very dark top
+    grd.addColorStop(0.5,'rgba(180,30,15,.75)');    // crimson mid
+    grd.addColorStop(1, 'rgba(90,10,5,.7)');        // deep bottom
+    return grd;
+  }
+
+  // ── Draw ───────────────────────────────────────────────────────
+  function drawAll() {
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    if (!candles.length) return;
+
+    // Price range
+    const prices = candles.flatMap(c => [c.h, c.l]);
+    const mn     = Math.min(...prices);
+    const mx     = Math.max(...prices);
+    const rng    = mx - mn || 1;
+
+    const padL  = 0, padR = 0, padT = 40, padB = 30;
+    const cw    = (w - padL - padR) / candles.length;
+    const bw    = Math.max(3, cw * 0.6);
+    const toY   = v => padT + (mx - v) / rng * (h - padT - padB);
+
+    // Faint horizontal price lines
+    const levels = 5;
+    ctx.strokeStyle = 'rgba(249,115,22,0.06)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 8]);
+    for (let i = 0; i <= levels; i++) {
+      const y = padT + (h - padT - padB) * (i / levels);
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Moving average line (last 8 candles smoothed)
+    const maData = candles.map((c, i) => {
+      const slice = candles.slice(Math.max(0, i-7), i+1);
+      return slice.reduce((s, x) => s + (x.o + x.c) / 2, 0) / slice.length;
+    });
+    ctx.strokeStyle = 'rgba(249,115,22,0.25)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    maData.forEach((v, i) => {
+      const x = padL + i * cw + cw / 2;
+      i === 0 ? ctx.moveTo(x, toY(v)) : ctx.lineTo(x, toY(v));
+    });
+    ctx.stroke();
+
+    // Draw candles with entrance animation (age-based opacity)
+    candles.forEach((cnd, i) => {
+      const x    = padL + i * cw + cw / 2;
+      const bull = cnd.c >= cnd.o;
+      const yHi  = toY(cnd.h);
+      const yLo  = toY(cnd.l);
+      const yO   = toY(Math.max(cnd.o, cnd.c));
+      const yC   = toY(Math.min(cnd.o, cnd.c));
+      const bh   = Math.max(1.5, yC - yO);
+      const alpha = Math.min(1, cnd.age / 8); // fade-in on new candles
+
+      // Glow under body
+      const glowR = bw * 2;
+      const glowY = (yO + yC) / 2;
+      const glowGrd = ctx.createRadialGradient(x, glowY, 0, x, glowY, glowR);
+      if (bull) {
+        glowGrd.addColorStop(0, `rgba(234,88,12,${0.12 * alpha})`);
+        glowGrd.addColorStop(1, 'transparent');
+      } else {
+        glowGrd.addColorStop(0, `rgba(150,20,10,${0.08 * alpha})`);
+        glowGrd.addColorStop(1, 'transparent');
+      }
+      ctx.fillStyle = glowGrd;
+      ctx.fillRect(x - glowR, glowY - glowR, glowR * 2, glowR * 2);
+
+      // Wick
+      ctx.strokeStyle = bull
+        ? `rgba(249,115,22,${0.5 * alpha})`
+        : `rgba(150,25,15,${0.45 * alpha})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, yHi); ctx.lineTo(x, yLo); ctx.stroke();
+
+      // Body gradient
+      ctx.fillStyle = bull
+        ? getBullGrad(ctx, x, yO, yC)
+        : getBearGrad(ctx, x, yO, yC);
+      ctx.globalAlpha = alpha;
+      const radius = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(x - bw/2, yO, bw, bh, radius);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      cnd.age++;
+    });
+
+    // Volume bars at the bottom (very faint)
+    const maxVol = 10;
+    candles.forEach((cnd, i) => {
+      const x    = padL + i * cw + cw / 2;
+      const bull = cnd.c >= cnd.o;
+      const vol  = Math.abs(cnd.c - cnd.o) * 2 + Math.random();
+      const barH = (vol / maxVol) * (padB - 4);
+      const y    = h - 4;
+      ctx.fillStyle = bull
+        ? 'rgba(234,88,12,0.15)'
+        : 'rgba(150,25,15,0.12)';
+      ctx.fillRect(x - bw/2 + 1, y - barH, bw - 2, barH);
+    });
+  }
+
+  // ── Scroll tracking ────────────────────────────────────────────
+  let lastScrollY  = window.scrollY;
+  let scrollVel    = 0;          // positive = scrolling down, negative = up
+  let smoothVel    = 0;          // smoothed velocity
+  let prevSmooth   = 0;
+
+  window.addEventListener('scroll', () => {
+    const sy  = window.scrollY;
+    scrollVel = sy - lastScrollY;
+    lastScrollY = sy;
+  }, { passive: true });
+
+  // ── Animation loop ─────────────────────────────────────────────
+  let tick = 0;
+  let candleAccum = 0; // fractional accumulator for new candles
+
+  function loop() {
+    tick++;
+
+    // Smooth the velocity with exponential decay
+    smoothVel = smoothVel * 0.82 + scrollVel * 0.18;
+    scrollVel *= 0.75; // decay raw vel between frames
+
+    // Age all candles
+    candles.forEach(c => { if (c.age < 30) c.age++; });
+
+    // ── Map scroll velocity → market behavior ──────────────────
+    const last = candles[candles.length - 1];
+    const absV = Math.abs(smoothVel);
+
+    // ── Track when scroll stops, set recovery target ────────────
+    if (absV < 0.5 && window._scrollWas > 0.5) {
+      // Just stopped scrolling — set recovery target toward mid-chart
+      // Target = slightly above current price (mean reversion upward)
+      window._recoveryTarget = last.c + 4 + Math.random() * 3;
+    }
+    window._scrollWas = absV;
+    if (!window._recoveryTarget) window._recoveryTarget = last.c;
+
+    // ── Every frame: grow the live candle body based on scroll ───
+    if (absV < 0.5) {
+      // Still → gentle mean reversion toward recovery target
+      const target = window._recoveryTarget;
+      const dist   = target - last.c;
+      // Drift 8% toward target each frame + small noise
+      const pull   = dist * 0.008;
+      const noise  = (Math.random() - 0.5) * 0.5;
+      last.c += pull + noise;
+      // Slowly adjust recovery target upward (gentle drift)
+      window._recoveryTarget += 0.008;
+      if (last.c > last.h) last.h = last.c;
+      if (last.c < last.l) last.l = last.c;
+      candleAccum += 1 / 60;
+
+    } else if (smoothVel > 0) {
+      // ── Scrolling DOWN → build a big red candle, spawn every 3s ─
+      // Accumulate price move on current candle (no new one yet)
+      const magnitude = absV > 8
+        ? absV * 0.55 + Math.random() * 1.0   // fast = big dump
+        : absV * 0.25 + Math.random() * 0.25; // slow = steady drop
+      last.c -= magnitude;
+      if (last.c < last.l) last.l = last.c;
+      // One candle every 3s regardless of speed
+      candleAccum += 1 / 60;
+
+    } else {
+      // ── Scrolling UP → build a big green candle, spawn every 3s ─
+      const magnitude = absV > 8
+        ? absV * 0.5 + Math.random() * 0.9    // fast = big pump
+        : absV * 0.2 + Math.random() * 0.2;   // slow = steady rise
+      last.c += magnitude;
+      if (last.c > last.h) last.h = last.c;
+      // One candle every 3s regardless of speed
+      candleAccum += 1 / 60;
+    }
+
+    price = last.c;
+
+    // Spawn new candles based on accumulator
+    while (candleAccum >= 1) {
+      candles.shift();
+      candles.push(genCandle());
+      candleAccum -= 1;
+    }
+
+    drawAll();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+
+</body>
+</html>
