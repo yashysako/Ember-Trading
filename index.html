@@ -712,12 +712,101 @@ body::before {
 }
 
 /* ── Viewport meta fix: prevent text size adjust ─────────────── */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; }
+body { overflow-x: hidden; }
 
 /* ── Safe area for notched phones ─────────────────────────────── */
 @supports (padding: env(safe-area-inset-bottom)) {
   footer { padding-bottom: calc(2rem + env(safe-area-inset-bottom)); }
   .hdr   { padding-top: calc(.8rem + env(safe-area-inset-top)); }
+}
+
+
+/* ── Prevent ALL overflow / text bleed on mobile ─────────────── */
+@media (max-width: 640px) {
+
+  /* Global overflow guard */
+  * { max-width: 100%; }
+  img, canvas, svg, table { max-width: 100% !important; }
+
+  /* Tables — force wrap on small screens */
+  .compare-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  .compare-table th, .compare-table td { white-space: normal; min-width: 110px; }
+
+  /* Phase items — long text wrapping */
+  .phase-items li { font-size: .8rem; word-break: break-word; overflow-wrap: break-word; }
+  .phase-goal { font-size: .66rem; white-space: normal; word-break: break-word; max-width: 100%; display: flex; flex-wrap: wrap; }
+
+  /* Pricing items */
+  .p-items li, .p-items li span { word-break: break-word; overflow-wrap: break-word; white-space: normal; }
+  .p-once { font-size: .65rem; white-space: normal; word-break: break-word; }
+  .p-price { white-space: nowrap; }
+
+  /* Indicator cards */
+  .ind-feats li { word-break: break-word; overflow-wrap: break-word; }
+  .ind-desc     { word-break: break-word; overflow-wrap: break-word; }
+  .ind-name     { word-break: break-word; white-space: normal; }
+  .ind-bot      { flex-wrap: wrap; gap: .6rem; }
+  .btn-ind      { flex-shrink: 0; }
+
+  /* About table */
+  .info-table   { table-layout: fixed; width: 100%; }
+  .info-table td { word-break: break-word; overflow-wrap: break-word; white-space: normal; }
+
+  /* FAQ */
+  .faq-q span:first-child { word-break: break-word; overflow-wrap: break-word; white-space: normal; flex: 1; }
+
+  /* Hero badge */
+  .hero-eyebrow { white-space: normal; word-break: break-word; flex-wrap: wrap; }
+
+  /* VIP description */
+  .vip-txt, .vip-mgmt-desc { word-break: break-word; overflow-wrap: break-word; }
+
+  /* Section subtitle */
+  .sec-sub, .sec-title { word-break: break-word; overflow-wrap: break-word; }
+
+  /* Docs items */
+  .doc-item { word-break: break-word; overflow-wrap: break-word; }
+
+  /* Free banner */
+  .free-txt { word-break: break-word; overflow-wrap: break-word; }
+
+  /* Mono text that overflows */
+  .font-mono, [class*="mono"], .ohlc-val, .cw-pair, .phase-dur, .p-once,
+  .p-badge, .mkt-status, .ind-acc, .ind-tag { 
+    white-space: normal; word-break: break-word; 
+  }
+
+  /* Buttons */
+  .btn-buy, .btn-fire, .btn-ghost, .btn-contact { 
+    white-space: normal; word-break: break-word;
+  }
+
+  /* Hero h1 — prevent letter overflow */
+  .hero h1 { 
+    overflow-wrap: break-word; 
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Wrap section wraps */
+  .wrap { overflow: hidden; }
+
+  /* Pricing note */
+  .pricing-note, [data-i18n="pricing-note"] { 
+    font-size: .75rem; 
+    word-break: break-word; 
+    overflow-wrap: break-word;
+  }
+
+  /* Phase right border adjust */
+  .phase-r { padding-right: .5rem; }
+
+  /* Section wrapper max-width guard */
+  section > .wrap, section > div { max-width: 100vw; overflow: hidden; }
+
+  /* Tool cards */
+  .tool-name, .tool-txt { word-break: break-word; overflow-wrap: break-word; }
 }
 
 </style>
