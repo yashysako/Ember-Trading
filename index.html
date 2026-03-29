@@ -47,7 +47,7 @@ a:hover~#cursor,button:hover~#cursor{width:16px;height:16px}
 ::-webkit-scrollbar-thumb{background:var(--fire3);border-radius:2px}
 
 /* ── Ticker ───────────────────────────────────────────────────── */
-.ticker{position:fixed;top:52px;left:0;right:0;z-index:199;background:rgba(7,9,13,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.35rem 0;overflow:hidden}
+.ticker{position:fixed;top:52px;left:0;right:0;z-index:199;background:rgba(7,9,13,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(249,115,22,0.15);border-bottom:1px solid rgba(249,115,22,0.15);padding:.4rem 0;overflow:hidden}
 .ticker-track{display:flex;gap:2.5rem;animation:ticker 40s linear infinite;width:max-content}
 .ticker-item{font-family:var(--mono);font-size:.68rem;display:flex;align-items:center;gap:.45rem;white-space:nowrap;color:var(--text2)}
 .t-sym{color:var(--text);font-weight:600}
@@ -780,8 +780,9 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 
 @media (max-width: 640px) {
-  .ticker { top: 45px; }
-  .hero   { margin-top: 70px !important; }
+  .ticker { top: 44px; padding: .35rem 0; }
+  .ticker-item { font-size: .62rem; gap: .35rem; }
+  .hero   { margin-top: 72px !important; }
 }
 
 </style>
@@ -1359,6 +1360,25 @@ document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='50px';ring.style.height='50px';ring.style.opacity='.5';});
   el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='34px';ring.style.height='34px';ring.style.opacity='1';});
 });
+
+
+// Position ticker dynamically below header
+(function() {
+  function positionTicker() {
+    const hdr = document.getElementById('hdr');
+    const ticker = document.querySelector('.ticker');
+    const hero = document.querySelector('.hero');
+    if (!hdr || !ticker) return;
+    const hdrH = hdr.offsetHeight;
+    ticker.style.top = hdrH + 'px';
+    const tickerH = ticker.offsetHeight;
+    if (hero) hero.style.marginTop = (hdrH + tickerH) + 'px';
+  }
+  positionTicker();
+  window.addEventListener('resize', positionTicker);
+  // Also run after fonts load
+  document.fonts && document.fonts.ready.then(positionTicker);
+})();
 
 // ── Nav ─────────────────────────────────────────────────────────
 function go(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});document.getElementById('nav').classList.remove('open');}
