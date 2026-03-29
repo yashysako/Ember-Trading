@@ -2250,53 +2250,41 @@ const translations = {
   function loop() {
     tick++;
 
-    // Smooth velocity — very gradual response (sluggish feel)
-    smoothVel = smoothVel * 0.93 + scrollVel * 0.07;
-    scrollVel *= 0.65; // faster raw decay so individual frames matter less
+    // Smooth velocity — very subtle
+    smoothVel = smoothVel * 0.96 + scrollVel * 0.04;
+    scrollVel *= 0.6;
 
     // Age all candles
     candles.forEach(c => { if (c.age < 30) c.age++; });
 
-    // ── Map scroll velocity → market behavior ──────────────────
-    const last = candles[candles.length - 1];
-    const absV = Math.abs(smoothVel);
+    const last  = candles[candles.length - 1];
+    const absV  = Math.abs(smoothVel);
 
-    // ── Track when scroll stops, set recovery target ────────────
-    if (absV < 0.3 && window._scrollWas > 0.3) {
-      window._recoveryTarget = last.c + 3 + Math.random() * 2;
-    }
-    window._scrollWas = absV;
-    if (!window._recoveryTarget) window._recoveryTarget = last.c;
+    // ── Strong mean reversion — price always pulled back to center ─
+    // Center is a fixed baseline so candles never drift far
+    if (!window._priceBase) window._priceBase = price;
+    const base      = window._priceBase;
+    const deviation = last.c - base;
+    const pullBack  = -deviation * 0.04; // always pulls toward base
 
-    // ── Every frame: grow the live candle body based on scroll ───
     if (absV < 0.3) {
-      // Still → gentle mean reversion
-      const pull  = (window._recoveryTarget - last.c) * 0.006;
-      const noise = (Math.random() - 0.5) * 0.35;
-      last.c += pull + noise;
-      window._recoveryTarget += 0.006;
-      if (last.c > last.h) last.h = last.c;
-      if (last.c < last.l) last.l = last.c;
+      // Still → tiny noise + strong pull to center
+      last.c += pullBack + (Math.random() - 0.5) * 0.2;
       candleAccum += 1 / 60;
-
     } else if (smoothVel > 0) {
-      // ── Scrolling DOWN — slow movement, proportional ─────────
-      const magnitude = absV > 8
-        ? absV * 0.18 + Math.random() * 0.3   // fast = moderate dump
-        : absV * 0.08 + Math.random() * 0.08; // slow = very gentle drop
-      last.c -= magnitude;
-      if (last.c < last.l) last.l = last.c;
+      // Scroll down → very small dip + center pull
+      const dip = absV * 0.04 + Math.random() * 0.04;
+      last.c += pullBack * 0.5 - dip;
       candleAccum += 1 / 60;
-
     } else {
-      // ── Scrolling UP — slow movement, proportional ───────────
-      const magnitude = absV > 8
-        ? absV * 0.16 + Math.random() * 0.28  // fast = moderate pump
-        : absV * 0.07 + Math.random() * 0.07; // slow = very gentle rise
-      last.c += magnitude;
-      if (last.c > last.h) last.h = last.c;
+      // Scroll up → very small rise + center pull
+      const rise = absV * 0.04 + Math.random() * 0.04;
+      last.c += pullBack * 0.5 + rise;
       candleAccum += 1 / 60;
     }
+
+    if (last.c > last.h) last.h = last.c;
+    if (last.c < last.l) last.l = last.c;
 
     price = last.c;
 
