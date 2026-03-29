@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Formation Trading Forex, Commodités &amp; Métaux - EmberTrading</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -33,7 +33,7 @@
   --display:'Bebas Neue',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;overflow-x:hidden;line-height:1.6;cursor:none}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;overflow-x:hidden;line-height:1.6;cursor:none;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
 
 /* ── Custom cursor ───────────────────────────────────────────── */
 #cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--fire);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s,background .2s;mix-blend-mode:screen}
@@ -86,8 +86,8 @@ a:hover~#cursor,button:hover~#cursor{width:16px;height:16px}
 .ham span{display:block;width:20px;height:2px;background:var(--text2);border-radius:1px}
 @media(max-width:860px){.nav{display:none}.ham{display:flex}}
 .nav.open{display:flex;flex-direction:column;align-items:flex-start;
-  position:absolute;top:100%;left:0;right:0;background:var(--bg);
-  border-bottom:1px solid var(--border);padding:1rem 2rem;gap:.25rem}
+  position:absolute;top:100%;left:0;right:0;background:rgba(7,9,13,.98);
+  border-bottom:1px solid var(--border);padding:1rem 1.1rem;gap:.25rem;backdrop-filter:blur(20px)}
 
 /* ── HERO ─────────────────────────────────────────────────────── */
 .hero{min-height:100vh;display:grid;align-items:center;padding:7rem 0 4rem;
@@ -568,6 +568,157 @@ body::before {
 .mkt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .mkt-open .mkt-dot{background:var(--green);animation:livePing 1.5s infinite}
 .mkt-closed .mkt-dot{background:var(--red)}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE OPTIMIZATION — Full responsive polish
+════════════════════════════════════════════════════════════════ */
+
+/* ── Base mobile defaults ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Hide custom cursor on touch */
+  #cursor, #cursor-ring { display: none !important; }
+  body { cursor: auto; }
+
+  /* Tighten section padding */
+  section { padding: 4rem 0; }
+  .wrap, .container { padding: 0 1.1rem; }
+
+  /* Header */
+  .hdr-inner { padding: 0 1.1rem; gap: .6rem; }
+  .logo-name  { font-size: 1.1rem; }
+  .cta-hdr    { display: none; } /* hide nav CTA on mobile, use hero btn */
+
+  /* Ticker smaller */
+  .ticker-item { font-size: .6rem; gap: .3rem; }
+  .ticker-track { gap: 1.8rem; }
+
+  /* Hero */
+  .hero { padding: 5.5rem 0 3rem; min-height: auto; }
+  .hero-wrap { padding: 0 1.1rem; }
+  .hero h1   { font-size: clamp(3rem, 12vw, 5rem); letter-spacing: .01em; }
+  .hero-sub  { font-size: .92rem; }
+  .hero-btns { flex-direction: column; gap: .6rem; }
+  .btn-fire, .btn-ghost { width: 100%; justify-content: center; padding: .75rem 1rem; }
+  .hero-stats { gap: 1.25rem; padding-top: 1.25rem; flex-wrap: wrap; }
+  .stat-n  { font-size: 2.2rem; }
+  .stat-l  { font-size: .6rem; }
+  .hero-eyebrow { font-size: .62rem; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .info-table td { font-size: .8rem; padding: .5rem .2rem; }
+  .info-table td:first-child { width: 32%; font-size: .65rem; }
+  .feat-grid { grid-template-columns: 1fr; }
+
+  /* Programme */
+  .phase { grid-template-columns: 50px 1fr; }
+  .phase-name { font-size: 1.5rem; }
+  .phase-num  { font-size: 1.8rem; }
+  .phase-r    { padding: 1.25rem 0 2rem 1rem; }
+  .phase-items li { font-size: .82rem; }
+  .phase-goal { font-size: .68rem; padding: .25rem .5rem; }
+
+  /* Pricing */
+  .price-grid { grid-template-columns: 1fr; }
+  .price-col  { padding: 1.5rem 1.1rem; }
+  .p-name     { font-size: 1.8rem; }
+  .p-price    { font-size: 2.4rem; }
+  .p-items li { font-size: .8rem; }
+  .compare-table { font-size: .72rem; }
+  .compare-table th, .compare-table td { padding: .45rem .6rem; }
+
+  /* Indicators */
+  .ind-grid  { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .ind       { padding: 1.1rem; }
+  .ind-desc  { font-size: .8rem; }
+  .ind-feats li { font-size: .75rem; }
+  .ind-name  { font-size: .78rem; }
+  .ind-price { font-size: 1.2rem; }
+
+  /* VIP */
+  .vip-box   { padding: 1.75rem 1.1rem; }
+  .vip-txt   { font-size: .88rem; }
+  .vip-mgmt-row { flex-direction: column; gap: .5rem; }
+
+  /* FAQ */
+  .faq-q     { font-size: .85rem; padding: .85rem 1rem; }
+  .faq-inner { font-size: .82rem; }
+
+  /* Docs */
+  .steps     { grid-template-columns: 1fr; }
+  .step-n    { font-size: 2.4rem; }
+  .step-name { font-size: .75rem; }
+  .step-txt  { font-size: .8rem; }
+
+  /* Contact */
+  .contact-grid  { grid-template-columns: 1fr; }
+  .c-card        { padding: 1.25rem 1.1rem; }
+  .free-banner   { flex-direction: column; gap: .75rem; }
+  .free-banner a { width: 100%; text-align: center; }
+
+  /* Section titles */
+  .sec-title { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .sec-tag   { font-size: .62rem; }
+
+  /* Footer */
+  .foot-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .foot-brand-name { font-size: 1.2rem; }
+  .disclaimer  { font-size: .72rem; padding: .85rem 1rem; }
+  .foot-bottom { flex-direction: column; gap: .5rem; font-size: .65rem; }
+
+  /* Buttons */
+  .btn-buy  { padding: .75rem .75rem; font-size: .78rem; }
+  .btn-ind  { padding: .35rem .75rem; font-size: .72rem; }
+  .btn-fire { font-size: .78rem; padding: .68rem 1.4rem; }
+}
+
+/* ── Tablet ────────────────────────────────────────────────────── */
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero h1  { font-size: clamp(3.2rem, 7vw, 4.5rem); }
+  .hero-right { display: none; } /* already handled above but reinforce */
+  section   { padding: 5rem 0; }
+
+  .about-grid  { gap: 2.5rem; }
+  .feat-grid   { grid-template-columns: 1fr 1fr; }
+
+  .price-grid  { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .ind-grid    { grid-template-columns: 1fr 1fr; }
+  .ind-grid .ind:last-child { grid-column: 1 / -1; }
+
+  .steps       { grid-template-columns: 1fr 1fr; }
+  .steps .step:last-child { grid-column: 1 / -1; }
+
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .compare-table { font-size: .78rem; }
+}
+
+/* ── Small phones ─────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .hero h1    { font-size: 2.8rem; }
+  .logo-name  { font-size: 1rem; }
+  .hero-stats { gap: .9rem; }
+  .stat-n     { font-size: 1.9rem; }
+  .p-price    { font-size: 2rem; }
+  .phase-name { font-size: 1.3rem; }
+}
+
+/* ── Touch targets — min 44px ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-btn, .btn-lang, .ham { min-height: 44px; min-width: 44px; }
+  .faq-q  { min-height: 52px; }
+  .btn-buy, .btn-fire, .btn-ghost { min-height: 48px; }
+}
+
+/* ── Viewport meta fix: prevent text size adjust ─────────────── */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* ── Safe area for notched phones ─────────────────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer { padding-bottom: calc(2rem + env(safe-area-inset-bottom)); }
+  .hdr   { padding-top: calc(.8rem + env(safe-area-inset-top)); }
+}
 
 </style>
 </head>
