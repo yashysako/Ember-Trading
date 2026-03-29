@@ -712,8 +712,7 @@ body::before {
 }
 
 /* ── Viewport meta fix: prevent text size adjust ─────────────── */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; }
-body { overflow-x: hidden; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 /* ── Safe area for notched phones ─────────────────────────────── */
 @supports (padding: env(safe-area-inset-bottom)) {
@@ -721,93 +720,6 @@ body { overflow-x: hidden; }
   .hdr   { padding-top: calc(.8rem + env(safe-area-inset-top)); }
 }
 
-
-/* ── Prevent ALL overflow / text bleed on mobile ─────────────── */
-@media (max-width: 640px) {
-
-  /* Global overflow guard */
-  * { max-width: 100%; }
-  img, canvas, svg, table { max-width: 100% !important; }
-
-  /* Tables — force wrap on small screens */
-  .compare-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
-  .compare-table th, .compare-table td { white-space: normal; min-width: 110px; }
-
-  /* Phase items — long text wrapping */
-  .phase-items li { font-size: .8rem; word-break: break-word; overflow-wrap: break-word; }
-  .phase-goal { font-size: .66rem; white-space: normal; word-break: break-word; max-width: 100%; display: flex; flex-wrap: wrap; }
-
-  /* Pricing items */
-  .p-items li, .p-items li span { word-break: break-word; overflow-wrap: break-word; white-space: normal; }
-  .p-once { font-size: .65rem; white-space: normal; word-break: break-word; }
-  .p-price { white-space: nowrap; }
-
-  /* Indicator cards */
-  .ind-feats li { word-break: break-word; overflow-wrap: break-word; }
-  .ind-desc     { word-break: break-word; overflow-wrap: break-word; }
-  .ind-name     { word-break: break-word; white-space: normal; }
-  .ind-bot      { flex-wrap: wrap; gap: .6rem; }
-  .btn-ind      { flex-shrink: 0; }
-
-  /* About table */
-  .info-table   { table-layout: fixed; width: 100%; }
-  .info-table td { word-break: break-word; overflow-wrap: break-word; white-space: normal; }
-
-  /* FAQ */
-  .faq-q span:first-child { word-break: break-word; overflow-wrap: break-word; white-space: normal; flex: 1; }
-
-  /* Hero badge */
-  .hero-eyebrow { white-space: normal; word-break: break-word; flex-wrap: wrap; }
-
-  /* VIP description */
-  .vip-txt, .vip-mgmt-desc { word-break: break-word; overflow-wrap: break-word; }
-
-  /* Section subtitle */
-  .sec-sub, .sec-title { word-break: break-word; overflow-wrap: break-word; }
-
-  /* Docs items */
-  .doc-item { word-break: break-word; overflow-wrap: break-word; }
-
-  /* Free banner */
-  .free-txt { word-break: break-word; overflow-wrap: break-word; }
-
-  /* Mono text that overflows */
-  .font-mono, [class*="mono"], .ohlc-val, .cw-pair, .phase-dur, .p-once,
-  .p-badge, .mkt-status, .ind-acc, .ind-tag { 
-    white-space: normal; word-break: break-word; 
-  }
-
-  /* Buttons */
-  .btn-buy, .btn-fire, .btn-ghost, .btn-contact { 
-    white-space: normal; word-break: break-word;
-  }
-
-  /* Hero h1 — prevent letter overflow */
-  .hero h1 { 
-    overflow-wrap: break-word; 
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  /* Wrap section wraps */
-  .wrap { overflow: hidden; }
-
-  /* Pricing note */
-  .pricing-note, [data-i18n="pricing-note"] { 
-    font-size: .75rem; 
-    word-break: break-word; 
-    overflow-wrap: break-word;
-  }
-
-  /* Phase right border adjust */
-  .phase-r { padding-right: .5rem; }
-
-  /* Section wrapper max-width guard */
-  section > .wrap, section > div { max-width: 100vw; overflow: hidden; }
-
-  /* Tool cards */
-  .tool-name, .tool-txt { word-break: break-word; overflow-wrap: break-word; }
-}
 
 </style>
 </head>
@@ -976,20 +888,20 @@ body { overflow-x: hidden; }
           <tr><td>Style</td><td>Scalping · Day Trading</td></tr>
           <tr><td>Plateforme</td><td>MetaTrader 5 · TradingView</td></tr>
         </table>
-        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:1.25rem" data-i18n="apropos-p1">J'ai commencé à m'intéresser sérieusement au trading en 2019...</p>
-        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:.6rem" data-i18n="apropos-p2">Fondateur d'EmberTrading...</p>
+        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:1.25rem" data-i18n="apropos-p1">J'ai commencé à m'intéresser sérieusement au trading en 2019. Après plusieurs années d'apprentissage, d'erreurs et d'optimisations, je trade de façon rentable et disciplinée depuis 3 ans.</p>
+        <p style="font-size:.87rem;color:var(--text2);line-height:1.75;margin-top:.6rem" data-i18n="apropos-p2">Fondateur d'EmberTrading, je partage mon approche axée sur <span style="color:#F97316;font-weight:600;">la gestion du risque stricte, l'edge statistique et la constance sur le long terme.</span></p>
         <div class="phil-card mt4">
           <div class="phil-lbl" data-i18n="apropos-philo-label">💡 Philosophie</div>
-          <p class="phil-txt" data-i18n="apropos-philo-text">80% mental, 20% technique...</p>
+          <p class="phil-txt" data-i18n="apropos-philo-text">80% mental, 20% technique. La différence entre un trader rentable et un trader non rentable réside dans la psychologie et la discipline.</p>
         </div>
       </div>
       <div class="rv">
         <div class="sec-tag" data-i18n="diff-title">Ce qui rend cette formation différente</div>
         <div class="feat-grid mt4">
-          <div class="feat-cell d1"><div class="feat-ico">🚫</div><div class="feat-title" data-i18n="diff-1-title">Pas de technique à la mode</div><div class="feat-txt" data-i18n="diff-1-text">Nous vous apportons les outils...</div></div>
-          <div class="feat-cell d2"><div class="feat-ico">🧠</div><div class="feat-title" data-i18n="diff-2-title">L'importance de la psychologie</div><div class="feat-txt" data-i18n="diff-2-text">Nous mettons beaucoup l'emphase...</div></div>
-          <div class="feat-cell d3"><div class="feat-ico">⚡</div><div class="feat-title" data-i18n="diff-3-title">Apprentissage par la pratique</div><div class="feat-txt" data-i18n="diff-3-text">Défi démo concret...</div></div>
-          <div class="feat-cell d4"><div class="feat-ico">🎯</div><div class="feat-title" data-i18n="diff-4-title">Accompagnement personnalisé</div><div class="feat-txt" data-i18n="diff-4-text">Feedback sans jugement...</div></div>
+          <div class="feat-cell d1"><div class="feat-ico">🚫</div><div class="feat-title" data-i18n="diff-1-title">Pas de technique à la mode</div><div class="feat-txt" data-i18n="diff-1-text">Nous vous apportons les outils pour créer votre propre technique de trading. Nous n'essayons pas de vous vendre une technique à la mode.</div></div>
+          <div class="feat-cell d2"><div class="feat-ico">🧠</div><div class="feat-title" data-i18n="diff-2-title">L'importance de la psychologie</div><div class="feat-txt" data-i18n="diff-2-text">Nous mettons beaucoup l'emphase sur la psychologie pour que vous développiez un bon risk management.</div></div>
+          <div class="feat-cell d3"><div class="feat-ico">⚡</div><div class="feat-title" data-i18n="diff-3-title">Apprentissage par la pratique</div><div class="feat-txt" data-i18n="diff-3-text">Défi démo concret avec journal obligatoire. Vous apprenez en agissant, pas en théorie.</div></div>
+          <div class="feat-cell d4"><div class="feat-ico">🎯</div><div class="feat-title" data-i18n="diff-4-title">Accompagnement personnalisé</div><div class="feat-txt" data-i18n="diff-4-text">Feedback sans jugement sur vos trades réels et démo. Je reste présent pour répondre à vos questions.</div></div>
         </div>
       </div>
     </div>
@@ -1217,14 +1129,14 @@ body { overflow-x: hidden; }
       <div class="tool">
         <div class="tool-ico">🔐</div>
         <div class="tool-name" data-i18n="tools-edge-title">Mon Edge Personnel</div>
-        <p class="tool-txt" data-i18n="tools-edge-text">Ma technique de trading combinant l'analyse technique avancée et la gestion psychologique du risque...</p>
+        <p class="tool-txt" data-i18n="tools-edge-text">Ma technique de trading combinant l'analyse technique avancée et la gestion psychologique du risque. Vous apprendrez exactement ma façon de placer mes positions et comment je gère mon capital avec discipline.</p>
         <div class="tool-badge">✓ <span data-i18n="tools-edge-label">Inclus à la Formation Complète</span></div>
         <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.2rem" data-i18n="tools-edge-sublabel">La fondation de ma rentabilité</div>
       </div>
       <div class="tool">
         <div class="tool-ico">🤖</div>
         <div class="tool-name" data-i18n="tools-ind-title">Mon Indicateur Propriétaire</div>
-        <p class="tool-txt" data-i18n="tools-ind-text">Un outil que j'ai développé et optimisé au fil des années de trading réel...</p>
+        <p class="tool-txt" data-i18n="tools-ind-text">Un outil que j'ai développé et optimisé au fil des années de trading réel. Cet indicateur vous donne un avantage supplémentaire pour identifier les opportunités de trading avec plus de précision.</p>
         <div class="tool-badge">✓ <span data-i18n="tools-ind-label">Inclus à la Formation Complète</span></div>
         <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.2rem" data-i18n="tools-ind-sublabel">Formation complète sur son utilisation quotidienne</div>
       </div>
@@ -1271,15 +1183,15 @@ body { overflow-x: hidden; }
       <h2 class="sec-title" data-i18n="faq-title">Questions Fréquentes</h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item rv d1"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq1-q">Quel est le capital minimum pour commencer?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq1-a">Pour la Phase Démo, zéro capital requis...</div></div></div>
-      <div class="faq-item rv d2"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq2-q">Combien de temps avant de devenir rentable?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq2-a">Cela dépend de votre engagement...</div></div></div>
-      <div class="faq-item rv d3"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq3-q">La formation couvre-t-elle plusieurs marchés ou juste le Forex?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq3-a">La formation couvre tous les marchés...</div></div></div>
-      <div class="faq-item rv d4"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq4-q">Quelle est la différence entre Formation Compacte et Formation Complète?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq4-a">La Formation Compacte vous enseigne...</div></div></div>
-      <div class="faq-item rv d5"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq5-q">Avez-vous des garanties de profit ou de remboursement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq5-a">Non. Le trading comporte des risques...</div></div></div>
-      <div class="faq-item rv d6"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq6-q">Quel broker/plateforme recommandez-vous?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq6-a">Je recommande MetaTrader 5 (MT5)...</div></div></div>
-      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq7-q">Dois-je avoir des connaissances préalables en trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq7-a">Non! La formation est conçue...</div></div></div>
-      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq8-q">Combien de temps par jour dois-je consacrer au trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq8-a">Avec ma méthode, vous pouvez trader...</div></div></div>
-      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq9-q">L'accompagnement 6 mois signifie quoi exactement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq9-a">Pour la Formation Complète: 6 mois d'accès direct...</div></div></div>
+      <div class="faq-item rv d1"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq1-q">Quel est le capital minimum pour commencer?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq1-a">Pour la Phase Démo, zéro capital requis - vous pratiquez sur un compte de démonstration. Pour passer à la Phase 3 (réel), je recommande un minimum de 500-1000$ pour une gestion prudente du risque.</div></div></div>
+      <div class="faq-item rv d2"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq2-q">Combien de temps avant de devenir rentable?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq2-a">Cela dépend de votre engagement. Avec la formation complète et la discipline, la plupart des traders voient des résultats positifs en 2-4 mois en démo. Le passage au réel nécessite généralement 3-6 mois supplémentaires.</div></div></div>
+      <div class="faq-item rv d3"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq3-q">La formation couvre-t-elle plusieurs marchés ou juste le Forex?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq3-a">La formation couvre tous les marchés: Forex, Or (XAUUSD), Commodités (pétrole, gaz naturel, etc.) et Métaux précieux. Les principes sont identiques pour tous.</div></div></div>
+      <div class="faq-item rv d4"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq4-q">Quelle est la différence entre Formation Compacte et Formation Complète?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq4-a">La Formation Compacte vous enseigne les fondamentaux solides des 3 phases. La Formation Complète ajoute: un coaching personnalisé intensif pendant 6 mois, l'accès à mon edge personnel et mon indicateur propriétaire.</div></div></div>
+      <div class="faq-item rv d5"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq5-q">Avez-vous des garanties de profit ou de remboursement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq5-a">Non. Le trading comporte des risques et aucune formation ne peut garantir des profits. Ce que je garantis: une formation solide basée sur mes 3+ ans de rentabilité, un accompagnement sérieux et de vraies stratégies.</div></div></div>
+      <div class="faq-item rv d6"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq6-q">Quel broker/plateforme recommandez-vous?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq6-a">Je recommande MetaTrader 5 (MT5) comme plateforme car c'est ce que j'utilise. Pour les brokers, je conseille ceux régulés et fiables.</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq7-q">Dois-je avoir des connaissances préalables en trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq7-a">Non! La formation est conçue pour les débutants complets ET les traders avec expérience. Chacun progresse à son rythme.</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq8-q">Combien de temps par jour dois-je consacrer au trading?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq8-a">Avec ma méthode, vous pouvez trader 30min-2h par jour pendant vos sessions préférées. La discipline et la qualité des trades comptent plus que le temps passé.</div></div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span data-i18n="faq9-q">L'accompagnement 6 mois signifie quoi exactement?</span><span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-inner" data-i18n="faq9-a">Pour la Formation Complète: 6 mois d'accès direct à moi pour questions illimitées, revue de vos charts et trades réels, feedback personnalisé, conseil psychologique et stratégies de scaling.</div></div></div>
     </div>
     <div class="center mt6" style="font-size:.88rem;color:var(--text2)">
       <span data-i18n="faq-cta">D'autres questions?</span>
@@ -1362,8 +1274,8 @@ body { overflow-x: hidden; }
       </div>
       <div class="disclaimer">
         <strong data-i18n="footer-disclaimer-title">Clause de non-responsabilité :</strong>
-        <span data-i18n="footer-disclaimer"> Les analyses partagées le sont à titre informatif et éducatif uniquement...</span>
-        <br><strong data-i18n="footer-risk">Risque élevé : Le trading sur le Forex comporte des risques importants...</strong>
+        <span data-i18n="footer-disclaimer"> Les analyses partagées le sont à titre informatif et éducatif uniquement. Elles ne constituent ni une recommandation d'achat ou de vente, ni un conseil en investissement.</span>
+        <br><strong data-i18n="footer-risk">Risque élevé : Le trading sur le Forex comporte des risques importants et peut entraîner la perte totale du capital investi.</strong>
       </div>
     </div>
     <div class="foot-bottom">
