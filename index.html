@@ -586,9 +586,17 @@ body::before {
   .wrap, .container { padding: 0 1.1rem; }
 
   /* Header */
-  .hdr-inner { padding: 0 1.1rem; gap: .6rem; }
-  .logo-name  { font-size: 1.1rem; }
-  .cta-hdr    { display: none; } /* hide nav CTA on mobile, use hero btn */
+  /* Header — équilibré mobile */
+  .hdr        { padding: .55rem 0; }
+  .hdr-inner  { padding: 0 1rem; gap: 0; justify-content: space-between; }
+  .logo       { gap: .45rem; flex-shrink: 1; min-width: 0; }
+  .logo-icon  { width: 26px; height: 26px; flex-shrink: 0; }
+  .logo-name  { font-size: .95rem; letter-spacing: .04em; white-space: nowrap; }
+  .hdr-right  { gap: .4rem; flex-shrink: 0; }
+  .lang-btn   { font-size: .65rem; padding: .28rem .55rem; }
+  .cta-hdr    { display: none; }
+  .ham        { padding: .3rem; }
+  .ham span   { width: 18px; }
 
   /* Ticker smaller */
   .ticker-item { font-size: .6rem; gap: .3rem; }
