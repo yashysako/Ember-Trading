@@ -2250,9 +2250,9 @@ const translations = {
   function loop() {
     tick++;
 
-    // Smooth the velocity with exponential decay
-    smoothVel = smoothVel * 0.82 + scrollVel * 0.18;
-    scrollVel *= 0.75; // decay raw vel between frames
+    // Smooth velocity — very gradual response (sluggish feel)
+    smoothVel = smoothVel * 0.93 + scrollVel * 0.07;
+    scrollVel *= 0.65; // faster raw decay so individual frames matter less
 
     // Age all candles
     candles.forEach(c => { if (c.age < 30) c.age++; });
@@ -2262,48 +2262,39 @@ const translations = {
     const absV = Math.abs(smoothVel);
 
     // ── Track when scroll stops, set recovery target ────────────
-    if (absV < 0.5 && window._scrollWas > 0.5) {
-      // Just stopped scrolling — set recovery target toward mid-chart
-      // Target = slightly above current price (mean reversion upward)
-      window._recoveryTarget = last.c + 4 + Math.random() * 3;
+    if (absV < 0.3 && window._scrollWas > 0.3) {
+      window._recoveryTarget = last.c + 3 + Math.random() * 2;
     }
     window._scrollWas = absV;
     if (!window._recoveryTarget) window._recoveryTarget = last.c;
 
     // ── Every frame: grow the live candle body based on scroll ───
-    if (absV < 0.5) {
-      // Still → gentle mean reversion toward recovery target
-      const target = window._recoveryTarget;
-      const dist   = target - last.c;
-      // Drift 8% toward target each frame + small noise
-      const pull   = dist * 0.008;
-      const noise  = (Math.random() - 0.5) * 0.5;
+    if (absV < 0.3) {
+      // Still → gentle mean reversion
+      const pull  = (window._recoveryTarget - last.c) * 0.006;
+      const noise = (Math.random() - 0.5) * 0.35;
       last.c += pull + noise;
-      // Slowly adjust recovery target upward (gentle drift)
-      window._recoveryTarget += 0.008;
+      window._recoveryTarget += 0.006;
       if (last.c > last.h) last.h = last.c;
       if (last.c < last.l) last.l = last.c;
       candleAccum += 1 / 60;
 
     } else if (smoothVel > 0) {
-      // ── Scrolling DOWN → build a big red candle, spawn every 3s ─
-      // Accumulate price move on current candle (no new one yet)
+      // ── Scrolling DOWN — slow movement, proportional ─────────
       const magnitude = absV > 8
-        ? absV * 0.55 + Math.random() * 1.0   // fast = big dump
-        : absV * 0.25 + Math.random() * 0.25; // slow = steady drop
+        ? absV * 0.18 + Math.random() * 0.3   // fast = moderate dump
+        : absV * 0.08 + Math.random() * 0.08; // slow = very gentle drop
       last.c -= magnitude;
       if (last.c < last.l) last.l = last.c;
-      // One candle every 3s regardless of speed
       candleAccum += 1 / 60;
 
     } else {
-      // ── Scrolling UP → build a big green candle, spawn every 3s ─
+      // ── Scrolling UP — slow movement, proportional ───────────
       const magnitude = absV > 8
-        ? absV * 0.5 + Math.random() * 0.9    // fast = big pump
-        : absV * 0.2 + Math.random() * 0.2;   // slow = steady rise
+        ? absV * 0.16 + Math.random() * 0.28  // fast = moderate pump
+        : absV * 0.07 + Math.random() * 0.07; // slow = very gentle rise
       last.c += magnitude;
       if (last.c > last.h) last.h = last.c;
-      // One candle every 3s regardless of speed
       candleAccum += 1 / 60;
     }
 
